@@ -4,6 +4,10 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public abstract class Jugador extends Observable {
     private String nombre;
     private EnumColor colorJugador;    
@@ -157,4 +161,17 @@ public abstract class Jugador extends Observable {
     private boolean hayCartasEnMano() {
     	return !this.mano.vacia();
     }
+
+	public JSONObject obtenerDatosJugador() {
+		JSONObject jugador=new JSONObject();
+		JSONArray mazoJSON= mazo.obtenerDatosLista();
+		JSONArray manoJSON= mano.obtenerDatosLista();
+		try {
+			jugador.put("mazo", mazoJSON);
+			jugador.put("mano", manoJSON);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return jugador;
+	}
 }

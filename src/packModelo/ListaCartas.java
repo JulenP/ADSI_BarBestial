@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ListaCartas {
     private ArrayList<Carta> lista;
 
@@ -291,4 +295,22 @@ public class ListaCartas {
         }
         return i;
     }
+
+	public JSONArray obtenerDatosLista() {
+		JSONArray listaCartas=new JSONArray();
+		Iterator<Carta> itr=lista.iterator();
+		int indice=0;
+		while(itr.hasNext()) {
+			JSONObject datosCarta= itr.next().obtenerDatosCarta();
+			try {
+				datosCarta.put("indice", indice);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			listaCartas.put(datosCarta);
+			indice++;
+		}
+		return listaCartas;
+	}
 }

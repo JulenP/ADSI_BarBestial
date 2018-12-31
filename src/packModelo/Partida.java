@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Partida extends Observable {
     private static Partida miPartida;
 
@@ -153,5 +157,23 @@ public class Partida extends Observable {
     private void notificar(String pInformacion) {
         super.setChanged();
         super.notifyObservers(pInformacion);
+    }
+    
+    public String obtenerEmail() {
+    	return ((JugadorReal) listaJugadores.get(0)).obtenerEmail();
+    }
+    
+    public JSONObject obtenerDatosPartida() {
+    	JSONObject jugador0=listaJugadores.get(0).obtenerDatosJugador();
+    	JSONObject jugador1=listaJugadores.get(1).obtenerDatosJugador();
+    	JSONObject datosPartida=new JSONObject();
+    	try {
+			datosPartida.put("jugador", jugador0);
+	    	datosPartida.put("cpu", jugador1);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return datosPartida;
+    	
     }
 }

@@ -1,7 +1,9 @@
 package packModelo;
 
 public class JugadorReal extends Jugador {	
-    public JugadorReal(String pNombre, EnumColor pColorJugador) {
+    private String email;
+
+	public JugadorReal(String pNombre, EnumColor pColorJugador) {
     	super(pNombre, pColorJugador);
     }  
     
@@ -29,5 +31,9 @@ public class JugadorReal extends Jugador {
 
     public void actualizarSaltosCanguro(int pSaltos) {
     	this.saltosElegidos = pSaltos;
+    }
+    
+    public String obtenerEmail() {
+    	return this.email;
     }
 }

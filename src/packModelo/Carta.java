@@ -1,5 +1,8 @@
 package packModelo;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Carta implements Comparable<Carta> {
     private Animal animal;
     private EnumColor color;
@@ -41,4 +44,15 @@ public class Carta implements Comparable<Carta> {
             }
         }
     }
+
+	public JSONObject obtenerDatosCarta() {
+		JSONObject carta=new JSONObject();
+		try {
+			carta.put("especie", this.getEspecie());
+			carta.put("color", this.getColor());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return carta;
+	}
 }
