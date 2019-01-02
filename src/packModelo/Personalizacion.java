@@ -14,6 +14,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import packGestores.GestorBD;
 import packVista.ventanaNombreBaraja;
 import packVista.ventanaPersonalizacion;
 
