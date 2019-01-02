@@ -4,14 +4,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import packControlador.Controlador.AtrasRankingListener;
+import packControlador.Controlador.MejorPuntuacionDiaListener;
+import packControlador.Controlador.MejoresJugadoresListener;
+import packControlador.Controlador.MejoresPartidasListener;
+import packControlador.Controlador.TusMejoresPartidasListener;
 import packModelo.Jugador;
 import packModelo.Partida;
 import packModelo.RankingDB;
 import packModelo.Tablero;
 import packVista.VentanaAyuda;
+import packVista.VentanaElegirRanking;
 import packVista.VentanaInicio;
 import packVista.VentanaJuego;
-import packVista.VentanaRanking;
+import packVista.VentanaMejoresJugadores;
+import packVista.VentanaMejoresPartidas;
+import packVista.VentanaPuntuacionDia;
+import packVista.VentanaTusMejoresPartidas;
 
 public class Controlador {
 	private static Controlador miControlador;
@@ -20,14 +32,19 @@ public class Controlador {
 	private Partida partida;
 	private Tablero tablero;
 	private RankingDB rankingDB;
+	private JSONArray datos = new JSONArray();
 	
 	/* Vista */
 	private VentanaInicio ventanaInicio;
 	private VentanaJuego ventanaJuego;
 	private VentanaAyuda ventanaAyuda;
-	private VentanaRanking ventanaRanking;
+	private VentanaElegirRanking ventanaElegirRanking;
+	private VentanaTusMejoresPartidas ventanaTusMejoresPartidas;
+	private VentanaPuntuacionDia ventanaMejorPuntuacionDia;
+	private VentanaMejoresPartidas ventanaMejoresPartidas;
+	private VentanaMejoresJugadores ventanaMejoresJugadores;
 	
-	public Controlador() {
+	public Controlador() throws JSONException {
 		this.partida = Partida.getMiPartida();
 		this.tablero = Tablero.getMiTablero();
 		this.rankingDB = RankingDB.getRankingDB();
@@ -35,7 +52,12 @@ public class Controlador {
 		this.ventanaInicio = new VentanaInicio();
 		this.ventanaJuego = new VentanaJuego();
 		this.ventanaAyuda = new VentanaAyuda();
-		this.ventanaRanking = new VentanaRanking();
+	
+		this.ventanaElegirRanking = new VentanaElegirRanking();
+		this.ventanaTusMejoresPartidas = new VentanaTusMejoresPartidas(datos);
+		this.ventanaMejorPuntuacionDia = new VentanaPuntuacionDia(datos);
+		this.ventanaMejoresPartidas = new VentanaMejoresPartidas(datos);
+		this.ventanaMejoresJugadores = new VentanaMejoresJugadores(datos);
 
 		
 		/* Listeners VentanaInicio */
@@ -53,9 +75,16 @@ public class Controlador {
 		
 		this.ventanaJuego.desactivarBotonJugarTurno();
 		this.ventanaJuego.desactivarBotonSiguiente();
+		
+		/* Listeners VentanaElegirRanking */
+		this.ventanaElegirRanking.addTusPartidasListener(new TusMejoresPartidasListener());
+		this.ventanaElegirRanking.addMejorPuntuacionDiaListener(new MejorPuntuacionDiaListener());
+		this.ventanaElegirRanking.addMejoresPartidasListener(new MejoresPartidasListener());
+		this.ventanaElegirRanking.addMejoresJugadoresListener(new MejoresJugadoresListener());
+		this.ventanaElegirRanking.addAtrasRankingListener(new AtrasRankingListener());
 	}
 	
-	public static Controlador getMiControlador() {
+	public static Controlador getMiControlador() throws JSONException {
         if (miControlador == null) {
         	miControlador = new Controlador();
         }
@@ -77,14 +106,41 @@ public class Controlador {
 	private void mostrarVentanaAyuda(){
 	    this.ventanaAyuda.setVisible(true);
     }
-
-	private void actualizarRanking() {
-		this.ventanaRanking.actualizarRanking(rankingDB.obtenerMejoresPuntuaciones());		
-	}
 	
-	private void mostrarVentanaRanking(){
-        this.ventanaRanking.setVisible(true);
+	private void mostrarVentanaElegirRanking(){
+        this.ventanaElegirRanking.setVisible(true);
     }
+	
+	private void mostrarVentanaTusMejoresPartidas() throws Exception{
+        datos = rankingDB.obtenerRankingMPU();
+        ventanaTusMejoresPartidas = new VentanaTusMejoresPartidas(datos);
+        this.ventanaTusMejoresPartidas.setVisible(true);
+        
+    }
+	
+	private void mostrarVentanaPuntuacionDia() throws Exception{
+        datos = rankingDB.obtenerRankingMPD();
+        ventanaMejorPuntuacionDia = new VentanaPuntuacionDia(datos);
+        this.ventanaMejorPuntuacionDia.setVisible(true);
+    }
+	
+	private void mostrarVentanaMejoresPartidas() throws Exception{
+        datos = rankingDB.obtenerRankingMPG();
+        ventanaMejoresPartidas = new VentanaMejoresPartidas(datos);
+        this.ventanaMejoresPartidas.setVisible(true);
+    }
+	
+	private void mostrarVentanaMejoresJugadores() throws Exception{
+		datos = rankingDB.obtenerRankingMJG();
+		ventanaMejoresJugadores = new VentanaMejoresJugadores(datos);
+		this.ventanaMejoresJugadores.setVisible(true);
+             
+    }
+	
+	private void atrasElegirRanking(){
+        this.ventanaElegirRanking.setVisible(true);
+    }
+	
 	
 	private void setUpObservers() {
 		ArrayList<Jugador> jugadores = this.partida.obtenerJugadores();
@@ -125,8 +181,71 @@ public class Controlador {
 	class RankingListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			actualizarRanking();
-		    mostrarVentanaRanking();
+		    mostrarVentanaElegirRanking();
+		}
+	}
+	
+	class TusMejoresPartidasListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		    try {
+				mostrarVentanaTusMejoresPartidas();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	class MejorPuntuacionDiaListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		    try {
+				mostrarVentanaPuntuacionDia();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	class MejoresPartidasListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				mostrarVentanaMejoresPartidas();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	class MejoresJugadoresListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				mostrarVentanaMejoresJugadores();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	class AtrasRankingListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(ventanaElegirRanking.isVisible())
+			{
+				ventanaElegirRanking.dispose();
+				ventanaInicio.setVisible(true);
+			}
+			else
+			{
+				mostrarVentanaElegirRanking();
+			}
+					
 		}
 	}
 	

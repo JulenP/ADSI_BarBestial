@@ -4,21 +4,29 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 import java.util.Vector;
+
+import javax.swing.JOptionPane;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import packGestores.GestorBD;
 
 public class RankingDB {
     private static RankingDB miRankingDB;
-    private Connection c;
-    private Statement s;
 
-    private RankingDB() {
-        File f = new File("ranking.db");
-        if (!f.exists()) {
-            this.crearRanking();
-            this.crearTablaPuntuaciones();
-        }
-    }
+    private RankingDB(){}
 
     public static RankingDB getRankingDB() {
         if (miRankingDB == null) {
@@ -27,102 +35,129 @@ public class RankingDB {
         return miRankingDB;
     }
 
-    private void crearRanking() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ranking.db");
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+    //RANKING MEJORES PARTIDAS USUARIO
+    public JSONArray obtenerRankingMPU() throws Exception
+    {
+    	// Se conecta
+    	GestorBD.getMiGestorBD().conectar();
+    	
+    	JSONArray datos = null;
+    	
+    	String pEmail = "a@a.com";//obtenerEmailUsuarioActual();
+	
+        String query = "SELECT * FROM rankingdb WHERE emailUsuario = '"+pEmail+"'";
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect(query);
+        
+        if (!result.next())
+    	{
+    		JOptionPane.showMessageDialog(null, "No tienes partidas finalizadas", "Error", JOptionPane.ERROR_MESSAGE);
+    		return null;
         }
-        System.out.println("Base de datos creada");
-    }
+    	else
+    	{
+    		result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM rankingdb WHERE emailUsuario = '"+pEmail+"' ORDER BY puntosJug DESC");
+    		datos = GestorBD.getMiGestorBD().sqlToJSON(result);
+    		
+    		//Se cierra
+        	GestorBD.getMiGestorBD().cerrarConexion();
+ 
+        	return datos;
+    	}
+      
 
-    private void crearTablaPuntuaciones() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ranking.db");
-
-            s = c.createStatement();
-            String instruccion = "CREATE TABLE PUNTUACIONES " +
-                    "(NOMBRE		VARCHAR(20) NOT NULL, " +
-                    " FECHA	    DATETIME    NOT NULL, " +
-                    " NCARTAS	INT, " +
-                    " FUERZA		INT, " +
-
-                    " PRIMARY KEY(NOMBRE, FECHA))";
-            s.executeUpdate(instruccion);
-            s.close();
-            c.close();
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        System.out.println("Tabla creada");
     }
     
-    public void insertarPuntuacion(String pNombre, int pNCartas, int pFuerza) {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ranking.db");
-            c.setAutoCommit(false);
-
-            s = c.createStatement();
-            String instruccion = "INSERT INTO PUNTUACIONES (NOMBRE, FECHA, NCARTAS, FUERZA) " +
-                    "VALUES(" + "'" + pNombre + "'" + "," + "datetime('now')" + "," + pNCartas + "," + pFuerza + ")";
-
-            s.executeUpdate(instruccion);
-
-            s.close();
-            c.commit();
-            c.close();
-
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+    //RANKING MEJOR PUNTUACION DIA
+    public JSONArray obtenerRankingMPD() throws Exception
+    {
+    	// Se conecta
+    	GestorBD.getMiGestorBD().conectar();
+    	
+    	JSONArray datos = null;
+    	
+        Date pFecha = new Date(); //obtenerFechaActual();
+        String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(pFecha);
+    	
+        String query = "SELECT * FROM rankingdb WHERE fecha = '"+modifiedDate+"';";
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect(query);
+        
+        if (!result.next())
+    	{
+    		JOptionPane.showMessageDialog(null, "No hay partidas finalizadas en este día", "Error", JOptionPane.ERROR_MESSAGE);
+    		return null;
         }
-        System.out.println("Puntuacion insertada");
+    	else
+    	{
+    		result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug FROM rankingDB WHERE fecha = '"+modifiedDate+"' ORDER BY puntosJug DESC LIMIT 0,1" );
+    		datos = GestorBD.getMiGestorBD().sqlToJSON(result);
+    		
+    		//Se cierra
+        	GestorBD.getMiGestorBD().cerrarConexion();
+    		
+        	return datos;
+    		
+    	}
+    	
+
     }
-
-    public Vector<Vector<String>> obtenerMejoresPuntuaciones() {
-        Vector<String> puntuacion;
-        Vector<Vector<String>> puntuaciones = new Vector<>();
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:ranking.db");
-            c.setAutoCommit(false);
-
-            s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM PUNTUACIONES ORDER BY fuerza ASC;");
-
-
-            while (rs.next()) {
-                puntuacion = new Vector<>();
-
-                String nombre = rs.getString("nombre");
-                String fecha = rs.getString("fecha");
-                String nCartas = rs.getString("ncartas");
-                String fuerza = rs.getString("fuerza");
-
-                puntuacion.add(nombre);
-                puntuacion.add(nCartas);
-                puntuacion.add(fuerza);
-                puntuacion.add(fecha);
-
-                puntuaciones.add(puntuacion);
-            }
-
-            rs.close();
-            s.close();
-            c.close();
-
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+    
+    //RANKING MEJORES PARTIDAS GLOBAL
+    public JSONArray obtenerRankingMPG() throws Exception
+    {
+    	// Se conecta
+    	GestorBD.getMiGestorBD().conectar();
+    	
+    	JSONArray datos = null;
+    	  	   	
+        String query = "SELECT * FROM rankingdb;";
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect(query);
+        
+        if (!result.next())
+        {
+    		JOptionPane.showMessageDialog(null, "No hay partidas finalizadas", "Error", JOptionPane.ERROR_MESSAGE);
+    		return null;
         }
-        System.out.println("Consulta terminada");
-        return puntuaciones;
+    	else
+    	{
+    		result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM rankingdb ORDER BY puntosJug DESC");
+    		datos = GestorBD.getMiGestorBD().sqlToJSON(result);
+    		
+    		//Se cierra
+        	GestorBD.getMiGestorBD().cerrarConexion();
+    		
+    		return datos;
+    	}
+
     }
+    
+    //RANKING MEJORES JUGADORES GLOBAL
+    public JSONArray obtenerRankingMJG() throws Exception
+    {
+    	// Se conecta
+    	GestorBD.getMiGestorBD().conectar();
+    	
+    	JSONArray JSONMedia = null;
+    	String query = "SELECT * FROM rankingdb;";
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect(query);
+         
+        if (!result.next())
+    	{
+    		JOptionPane.showMessageDialog(null, "No hay partidas finalizadas", "Error", JOptionPane.ERROR_MESSAGE);
+    		return null;
+        }
+    	else
+    	{
+    		result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailusuario, AVG(puntosJug) FROM rankingdb GROUP BY emailusuario ORDER BY AVG(puntosJug) DESC");
+    		JSONMedia = GestorBD.getMiGestorBD().sqlToJSON(result);
+    		
+    		//Se cierra
+        	GestorBD.getMiGestorBD().cerrarConexion();
+        	
+    		return JSONMedia;
+    	}
+
+    }    
+    		
 }
+
    
