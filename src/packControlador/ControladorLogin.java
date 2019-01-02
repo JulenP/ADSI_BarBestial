@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import packModelo.BarBestial;
 import packVista.VentanaLogin;
 import packVista.VentanaMenuInicial;
+import org.json.JSONException;
 
 public class ControladorLogin implements ActionListener {
 
@@ -31,7 +32,7 @@ public class ControladorLogin implements ActionListener {
 						Controlador c = new Controlador();
 						c.iniciarAplicacion();
 					}
-				} catch (SQLException e1) {
+				} catch (SQLException | JSONException e1) {
 					e1.printStackTrace();
 				}
 			}

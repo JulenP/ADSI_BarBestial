@@ -5,15 +5,26 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+
 public class VentanaInicio extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField textFieldNombre;
 
     private JButton btnJugar;
     private JButton btnAyuda;
     private JButton btnRanking;
+    private JButton btnCambiarContrasena;
+    private JButton btnPersonalizarCartas;
+    
+    private static VentanaInicio miVentanaInicio;
+	
+	public static VentanaInicio getVentanaInicio() {
+		if (miVentanaInicio == null) {
+			miVentanaInicio = new VentanaInicio();
+		}
+		return miVentanaInicio;
+	}
 
     /**
      * Create the frame.
@@ -39,17 +50,17 @@ public class VentanaInicio extends JFrame {
 
         JPanel panelMenu = new JPanel();
         contentPane.add(panelMenu, BorderLayout.SOUTH);
-
-        JLabel lblIntroduceTuNombre = new JLabel("Introduce tu nombre:");
-        panelMenu.add(lblIntroduceTuNombre);
-
-        this.textFieldNombre = new JTextField();
-        panelMenu.add(textFieldNombre);
-        textFieldNombre.setColumns(10);
-
+        
+        btnCambiarContrasena = new JButton("Cambiar contraseña");
+        panelMenu.add(btnCambiarContrasena);
+        
+        
         this.btnJugar = new JButton("Jugar");
         panelMenu.add(btnJugar);
-
+                
+        btnPersonalizarCartas = new JButton("Personalizar cartas");
+        panelMenu.add(btnPersonalizarCartas);
+        
         this.btnAyuda = new JButton("Ayuda");
         panelMenu.add(btnAyuda);
 
@@ -89,19 +100,22 @@ public class VentanaInicio extends JFrame {
     public void addRankingListener(ActionListener listenForBtnRanking) {
         btnRanking.addActionListener(listenForBtnRanking);
     }
-
-    public String getTextFieldNombreValue() {
-        return this.textFieldNombre.getText();
+    
+    public void addCambiarContrasenaListener(ActionListener listenForBtnCambiarContrasena) {
+        btnCambiarContrasena.addActionListener(listenForBtnCambiarContrasena);
     }
+    
+    /*public String getTextFieldNombreValue() {
+        return this.textFieldNombre.getText();
+    }*/
 
-    public void showNombreErrorMessage() {
+   /* public void showNombreErrorMessage() {
         JOptionPane.showMessageDialog(this,
                 "Introduce un nombre.");
-    }
+    } */
 
     public void cerrarVentana() {
         setVisible(false);
         dispose();
     }
-
 }

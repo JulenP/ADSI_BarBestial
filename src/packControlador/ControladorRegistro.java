@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import packModelo.BarBestial;
 import packVista.VentanaMenuInicial;
 import packVista.VentanaRegistro;
+import org.json.JSONException;
 
 public class ControladorRegistro implements ActionListener{
 
@@ -38,7 +39,7 @@ public class ControladorRegistro implements ActionListener{
 							 VentanaRegistro.getVentanaRegistro().dispose();
 						 } 
 					}
-				} catch (SQLException e1) {
+				} catch (SQLException  | JSONException e1) {
 					JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese email", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}

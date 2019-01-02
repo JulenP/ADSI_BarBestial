@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import packFacebook.Facebook;
 import packModelo.BarBestial;
-import packVista.VentanaInicio;
 import packVista.VentanaLogin;
 import packVista.VentanaMenuInicial;
 import packVista.VentanaRecuperarContraseña;

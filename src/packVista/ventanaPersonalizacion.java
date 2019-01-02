@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import packModelo.GestorBD;
+import packGestores.GestorBD;
 import packModelo.Personalizacion;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

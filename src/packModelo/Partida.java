@@ -39,7 +39,7 @@ public class Partida extends Observable {
         EsLoQueHay elqh = EsLoQueHay.getMiEsLoQueHay();
         elqh.vaciar();
 
-        this.listaJugadores.add(new JugadorReal(pNombreJugador, EnumColor.AZUL));
+       //this.listaJugadores.add(new JugadorReal(pNombreJugador, EnumColor.AZUL));
         this.listaJugadores.add(new Maquina("Maquina", EnumColor.VERDE));
 
         this.repartirCartas();
@@ -174,6 +174,9 @@ public class Partida extends Observable {
 			e.printStackTrace();
 		}
 		return datosPartida;
-    	
+    }
+	
+	public void anadirJugador(JugadorReal pJugador){	
+   	 	listaJugadores.add(pJugador);
     }
 }

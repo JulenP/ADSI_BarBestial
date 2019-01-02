@@ -24,6 +24,7 @@ import packVista.VentanaMejoresJugadores;
 import packVista.VentanaMejoresPartidas;
 import packVista.VentanaPuntuacionDia;
 import packVista.VentanaTusMejoresPartidas;
+import packVista.VentanaCambiarContrasena;
 
 public class Controlador {
 	private static Controlador miControlador;
@@ -43,6 +44,7 @@ public class Controlador {
 	private VentanaPuntuacionDia ventanaMejorPuntuacionDia;
 	private VentanaMejoresPartidas ventanaMejoresPartidas;
 	private VentanaMejoresJugadores ventanaMejoresJugadores;
+	private VentanaCambiarContrasena ventanaCambioContrasena;
 	
 	public Controlador() throws JSONException {
 		this.partida = Partida.getMiPartida();
@@ -52,6 +54,7 @@ public class Controlador {
 		this.ventanaInicio = new VentanaInicio();
 		this.ventanaJuego = new VentanaJuego();
 		this.ventanaAyuda = new VentanaAyuda();
+		this.ventanaCambioContrasena = VentanaCambiarContrasena.getVentanaCambiocontrasena();
 	
 		this.ventanaElegirRanking = new VentanaElegirRanking();
 		this.ventanaTusMejoresPartidas = new VentanaTusMejoresPartidas(datos);
@@ -64,6 +67,7 @@ public class Controlador {
 		this.ventanaInicio.addJugarListener(new JugarListener());
 		this.ventanaInicio.addAyudaListener(new AyudaListener());
 		this.ventanaInicio.addRankingListener(new RankingListener());
+		this.ventanaInicio.addCambiarContrasenaListener(new CambiarContrasenaListener());
 
 		/* Listeners VentanaJuego */
 		this.ventanaJuego.addJugarTurnoListener(new JugarTurnoListener());
@@ -159,7 +163,7 @@ public class Controlador {
 	class JugarListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String nombre = ventanaInicio.getTextFieldNombreValue();
+		/*	String nombre = ventanaInicio.getTextFieldNombreValue();
 			
 			if(nombre.length() > 0) {
 				//ocultarVentanaInicio();
@@ -168,6 +172,10 @@ public class Controlador {
 				setUpObservers();
 			}			
 			else ventanaInicio.showNombreErrorMessage();			
+		}*/
+			mostrarVentanaJuego();
+			partida.inicializarPartida(null);;
+			setUpObservers();
 		}
 	}
 	
@@ -182,6 +190,13 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 		    mostrarVentanaElegirRanking();
+		}
+	}
+	
+	class CambiarContrasenaListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		   ventanaCambioContrasena.setVisible(true);
 		}
 	}
 	
