@@ -76,6 +76,7 @@ public class Controlador {
 		this.ventanaJuego.addElegirCarta3Listener(new ElegirCarta3Listener());
 		this.ventanaJuego.addElegirCarta4Listener(new ElegirCarta4Listener());
 		this.ventanaJuego.addSiguienteListener(new SiguienteListener());
+		/*this.ventanaJuego.addGuardarListener(new GuardarListener());*/
 		
 		this.ventanaJuego.desactivarBotonJugarTurno();
 		this.ventanaJuego.desactivarBotonSiguiente();
@@ -325,4 +326,13 @@ public class Controlador {
 			ventanaJuego.desactivarBotonSiguiente();
 		}
 	}
+	/**
+	class GuardarListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			 
+			
+		}		
+	}
+	**/
 }

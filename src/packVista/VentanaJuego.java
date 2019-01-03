@@ -1,16 +1,30 @@
 package packVista;
 
-import packModelo.JugadorReal;
-import packModelo.Partida;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import packModelo.JugadorReal;
+import packModelo.Partida;
 
 public class VentanaJuego extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
@@ -47,6 +61,8 @@ public class VentanaJuego extends JFrame implements Observer {
     private JLabel bestLabel4;
     private JButton btnJugarTurno;
     private JButton btnSiguiente;
+    private JButton btnGuardar;
+    private JButton btnAyuda;
 
     /**
      * Create the frame.
@@ -97,6 +113,10 @@ public class VentanaJuego extends JFrame implements Observer {
 
         panelElegirCartas = new JPanel();
         panelJugadorReal.add(panelElegirCartas, BorderLayout.SOUTH);
+        
+        btnAyuda = new JButton("Ayuda");
+        btnAyuda.setEnabled(false);
+        panelElegirCartas.add(btnAyuda);
 
         //Tablero.getMiTablero().anadirObservador(this);
 
@@ -124,6 +144,9 @@ public class VentanaJuego extends JFrame implements Observer {
         btnSiguiente = new JButton("Siguiente");
         btnSiguiente.setPreferredSize(new Dimension(120, 25));
         panelElegirCartas.add(btnSiguiente);
+        
+        btnGuardar = new JButton("Guardar");
+        panelElegirCartas.add(getBtnGuardar());
 
         panelCola = new JPanel();
         contentPane.add(panelCola, BorderLayout.CENTER);
@@ -209,7 +232,20 @@ public class VentanaJuego extends JFrame implements Observer {
         setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
     }
 
-    /**
+    private Component getBtnGuardar() {
+    	if (btnGuardar == null) {
+    		btnGuardar = new JButton(" ");
+    		btnGuardar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					VentanaGuardar ventanaGuardar =new VentanaGuardar();
+					
+				}
+			});
+		}
+		return btnGuardar;
+	}
+
+	/**
      * Launch the application.
      */
     public static void main(String[] args) {
@@ -337,6 +373,10 @@ public class VentanaJuego extends JFrame implements Observer {
 
     public void addElegirCarta4Listener(ActionListener listenForBtnElegirCarta4) {
         btnElegirCarta4.addActionListener(listenForBtnElegirCarta4);
+    }
+    
+    public void addGuardarListener(ActionListener listenForbtnGuardar) {
+    	btnGuardar.addActionListener(listenForbtnGuardar);
     }
 
     private void popUpEspeciesCola(String pInfoEspeciesCola) {
@@ -538,4 +578,6 @@ public class VentanaJuego extends JFrame implements Observer {
             return null;
         }
     }
+    
+    
 }

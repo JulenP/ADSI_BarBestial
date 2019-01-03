@@ -65,4 +65,8 @@ public class BarBestial {
 			} 
 			return false;
 		}
+		
+		public void guardarPartida(String nombrePartida) {
+			GestorGuardadoCarga.getGestorGuardadoCarga().guardarPartida(nombrePartida);
+		}
 }
