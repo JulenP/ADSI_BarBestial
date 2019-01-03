@@ -18,18 +18,18 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 
-public class VentanaRecuperarContraseña extends JFrame {
+public class VentanaRecuperarContrasena extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldEmail;
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 	
-	private static VentanaRecuperarContraseña miVentanaRecuperarContrasena;
+	private static VentanaRecuperarContrasena miVentanaRecuperarContrasena;
 	
-	public static VentanaRecuperarContraseña getVentanaRecuperarContrasena() {
+	public static VentanaRecuperarContrasena getVentanaRecuperarContrasena() {
 		if (miVentanaRecuperarContrasena == null) {
-			miVentanaRecuperarContrasena = new VentanaRecuperarContraseña();
+			miVentanaRecuperarContrasena = new VentanaRecuperarContrasena();
 		}
 		return miVentanaRecuperarContrasena;
 	}
@@ -41,7 +41,7 @@ public class VentanaRecuperarContraseña extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaRecuperarContraseña frame = new VentanaRecuperarContraseña();
+					VentanaRecuperarContrasena frame = new VentanaRecuperarContrasena();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +53,7 @@ public class VentanaRecuperarContraseña extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaRecuperarContraseña() {
+	public VentanaRecuperarContrasena() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 311, 197);
 		contentPane = new JPanel();

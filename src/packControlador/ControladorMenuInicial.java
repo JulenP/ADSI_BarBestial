@@ -7,7 +7,7 @@ import packFacebook.Facebook;
 import packModelo.BarBestial;
 import packVista.VentanaLogin;
 import packVista.VentanaMenuInicial;
-import packVista.VentanaRecuperarContraseña;
+import packVista.VentanaRecuperarContrasena;
 import packVista.VentanaRegistro;
 
 public class ControladorMenuInicial implements ActionListener{
@@ -40,7 +40,7 @@ public class ControladorMenuInicial implements ActionListener{
 			VentanaMenuInicial.getVentanaMenuInicial().dispose();
 		
 		} else if (action.equals("recuperarContrasena")) {
-			VentanaRecuperarContraseña.getVentanaRecuperarContrasena().setVisible(true);
+			VentanaRecuperarContrasena.getVentanaRecuperarContrasena().setVisible(true);
 			VentanaMenuInicial.getVentanaMenuInicial().dispose();
 	    }
 	}

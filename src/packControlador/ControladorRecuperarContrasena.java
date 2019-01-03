@@ -9,14 +9,14 @@ import javax.swing.JOptionPane;
 
 import packModelo.BarBestial;
 import packVista.VentanaMenuInicial;
-import packVista.VentanaRecuperarContraseña;
+import packVista.VentanaRecuperarContrasena;
 
 public class ControladorRecuperarContrasena implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
-		String email = VentanaRecuperarContraseña.getVentanaRecuperarContrasena().getTextFieldEmailValue();
+		String email = VentanaRecuperarContrasena.getVentanaRecuperarContrasena().getTextFieldEmailValue();
 		
 		if(action.equals("aceptar")) { 
 			if (email.length()<=0 ){
@@ -25,7 +25,7 @@ public class ControladorRecuperarContrasena implements ActionListener{
 				
 				try {
 					if (BarBestial.getBarBestial().recuperarContrasena(email)){
-						VentanaRecuperarContraseña.getVentanaRecuperarContrasena().dispose();
+						VentanaRecuperarContrasena.getVentanaRecuperarContrasena().dispose();
 						VentanaMenuInicial.getVentanaMenuInicial().setVisible(true);
 					} else {
 						JOptionPane.showMessageDialog(null, "Los datos no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -38,7 +38,7 @@ public class ControladorRecuperarContrasena implements ActionListener{
 		
 		} else if (action.equals("cancelar")) {
 			VentanaMenuInicial.getVentanaMenuInicial().setVisible(true);
-			VentanaRecuperarContraseña.getVentanaRecuperarContrasena().dispose();
+			VentanaRecuperarContrasena.getVentanaRecuperarContrasena().dispose();
 		}
 	}
 }
