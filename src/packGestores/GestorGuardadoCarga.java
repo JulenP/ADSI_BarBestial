@@ -1,4 +1,4 @@
-package packModelo;
+package packGestores;
 
 public class GestorGuardadoCarga {
 	private static GestorGuardadoCarga miGestorGuardadoCarga;

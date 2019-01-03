@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.mail.MessagingException;
 
+import packGestores.GestorGuardadoCarga;
 import packGestores.GestorUsuarios;
 
 public class BarBestial {

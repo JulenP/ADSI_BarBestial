@@ -234,10 +234,11 @@ public class VentanaJuego extends JFrame implements Observer {
 
     private Component getBtnGuardar() {
     	if (btnGuardar == null) {
-    		btnGuardar = new JButton(" ");
+    		btnGuardar = new JButton(" Guardar");
     		btnGuardar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					VentanaGuardar ventanaGuardar =new VentanaGuardar();
+					VentanaGuardado ventanaGuardar =new VentanaGuardado();
+					
 					
 				}
 			});
