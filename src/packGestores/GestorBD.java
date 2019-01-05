@@ -11,25 +11,23 @@ import org.json.simple.JSONObject;
 
 
 public class GestorBD {
-	
+	private String url="jdbc:sqlite:BarBestial.bd";
 	private static GestorBD miGestorBD;
 	private Connection myConn;
 	private Statement myStmt;
 
 	private GestorBD() {
 	}
-
 	public static GestorBD getMiGestorBD() {
 		if (miGestorBD == null) {
 			miGestorBD = new GestorBD();
 		}
 		return miGestorBD;
 	}
-
-	
+	/*jdbc:mysql://localhost:3306/nombreBD", "usuario", "password*/
 	public void conectar() throws SQLException { 	// CAMBIAR LOS DATOS SEGUN LA BD Y EL USUARIO DE MYSQL
 		
-		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/nombreBD", "usuario", "password");
+		myConn = DriverManager.getConnection(url);
 
 		if(myConn.isClosed() == false)
 		{
