@@ -16,7 +16,6 @@ public class GestorUsuarios {
 	private static GestorUsuarios miGestorUsuarios;
 
 	public GestorUsuarios() {
-
 	}
 
 	public static GestorUsuarios getGestorUsuarios() {
