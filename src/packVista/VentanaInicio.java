@@ -118,4 +118,8 @@ public class VentanaInicio extends JFrame {
         setVisible(false);
         dispose();
     }
+	
+	 public void desactivarBotonCambiarContraseña() {
+        btnCambiarContrasena.setEnabled(false);
+    }
 }

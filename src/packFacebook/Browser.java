@@ -16,7 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import packGestores.GestorUsuarios;
-import packModelo.BarBestial;
 import packModelo.EnumColor;
 import packModelo.JugadorReal;
 import packModelo.Partida;
@@ -61,18 +60,24 @@ public class Browser extends Region {
           int pos = myUrl.indexOf("code=");
           code = myUrl.substring(pos + "code=".length());
           FacebookClient.AccessToken token = facebookClient.obtainUserAccessToken(appId, appSecret, SUCCESS_URL, code);
-          System.out.println("Accesstoken: " + token.getAccessToken());
-          System.out.println("Expires: " + token.getExpires());
           
-         FacebookClient  facebookClient1 = new DefaultFacebookClient(token.getAccessToken(), Version.LATEST);
+        	 FacebookClient  facebookClient1 = new DefaultFacebookClient(token.getAccessToken(), Version.LATEST);
          User user =  facebookClient1.fetchObject("me", User.class, Parameter.with("fields","name,email"));
     
+     	  String email = user.getEmail();
+         
+         /* Si el usuario no tiene el email puesto como publico, el metodo user.getEmail() devolvera null. 
+          *  En ese caso se utilizara un ID que devuelve user.getId()
+          */
          try {
-			if (!GestorUsuarios.getGestorUsuarios().existeUsuario(user.getEmail())){
-				 BarBestial.getBarBestial().registrarUsuario(user.getEmail(), user.getName(),null);
-			 } else{
-				Partida.getMiPartida().anadirJugador(new JugadorReal(user.getEmail(),user.getName(), EnumColor.AZUL));
-			 }
+        	 if (email==null){		
+        		 email = user.getId();
+        	 }
+        	 
+			if (!GestorUsuarios.getGestorUsuarios().existeUsuario(email)){
+				GestorUsuarios.getGestorUsuarios().registrarUsuario(email, user.getName(),null);
+			 } 
+			Partida.getMiPartida().anadirJugador(new JugadorReal(email, user.getName(), EnumColor.AZUL));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

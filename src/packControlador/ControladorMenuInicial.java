@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import packFacebook.Facebook;
 import packModelo.BarBestial;
 import packVista.VentanaLogin;
+import packVista.VentanaInicio;
 import packVista.VentanaMenuInicial;
 import packVista.VentanaRecuperarContrasena;
 import packVista.VentanaRegistro;
@@ -19,14 +20,12 @@ public class ControladorMenuInicial implements ActionListener{
 		if(action.equals("inicioSesionFB")) { 
 			
 		    try {
-		   	 	VentanaMenuInicial.getVentanaMenuInicial().dispose();
 		   	 	Facebook.launch(Facebook.class);
-		   	 	if (BarBestial.getBarBestial().obtenerEmailUsuarioActual()!=null){
-		    			Controlador c = new Controlador();
-					c.iniciarAplicacion();
-		   	 	} else {
-		    			VentanaMenuInicial.getVentanaMenuInicial().setVisible(true);
-		    		}
+		    		if (BarBestial.getBarBestial().obtenerEmailUsuarioActual()!=null){
+		    			VentanaMenuInicial.getVentanaMenuInicial().dispose();
+		    			VentanaInicio.getVentanaInicio().setVisible(true);
+		    			VentanaInicio.getVentanaInicio().desactivarBotonCambiarContraseña();
+		    		} 
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
