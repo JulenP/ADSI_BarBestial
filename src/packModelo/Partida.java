@@ -160,7 +160,10 @@ public class Partida extends Observable {
     }
     
     public String obtenerEmail() {
-    	return ((JugadorReal) listaJugadores.get(0)).obtenerEmail();
+		if (listaJugadores.isEmpty()){
+     		return null;
+     	}
+    		return ((JugadorReal) listaJugadores.get(0)).obtenerEmail();
     }
     
     public JSONObject obtenerDatosPartida() {

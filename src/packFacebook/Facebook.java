@@ -15,6 +15,7 @@ public class Facebook extends Application {
 	    Browser facebookBrowser = new Browser(appId, appSecret);
 	    Scene scene = new Scene(facebookBrowser, 900, 600, Color.web("#666970"));
 	    primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 	    primaryStage.show();
 	    facebookBrowser.showLogin();
 	}

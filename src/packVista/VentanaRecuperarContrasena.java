@@ -54,6 +54,7 @@ public class VentanaRecuperarContrasena extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaRecuperarContrasena() {
+		setTitle("Recuperación de contraseña");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 311, 197);
 		contentPane = new JPanel();
