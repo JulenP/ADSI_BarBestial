@@ -43,10 +43,9 @@ public class RankingDB {
     	
     	JSONArray datos = null;
     	
-    	String pEmail = "a@a.com";//obtenerEmailUsuarioActual();
+    	String pEmail = BarBestial.getBarBestial().obtenerEmailUsuarioActual();
 	
-        String query = "SELECT * FROM rankingdb WHERE emailUsuario = '"+pEmail+"'";
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect(query);
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM rankingdb WHERE emailUsuario = '"+pEmail+"' ORDER BY puntosJug DESC");
         
         if (!result.next())
     	{
@@ -55,8 +54,8 @@ public class RankingDB {
         }
     	else
     	{
-    		result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM rankingdb WHERE emailUsuario = '"+pEmail+"' ORDER BY puntosJug DESC");
-    		datos = GestorBD.getMiGestorBD().sqlToJSON(result);
+    	   		
+    		datos = crearJSON(result);
     		
     		//Se cierra
         	GestorBD.getMiGestorBD().cerrarConexion();
@@ -75,11 +74,11 @@ public class RankingDB {
     	
     	JSONArray datos = null;
     	
-        Date pFecha = new Date(); //obtenerFechaActual();
+        Date pFecha = new Date(); //Fecha Actual
         String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(pFecha);
     	
-        String query = "SELECT * FROM rankingdb WHERE fecha = '"+modifiedDate+"';";
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect(query);
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug FROM rankingDB WHERE fecha = '"+modifiedDate+"' ORDER BY puntosJug DESC LIMIT 0,1" );
+
         
         if (!result.next())
     	{
@@ -88,8 +87,7 @@ public class RankingDB {
         }
     	else
     	{
-    		result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug FROM rankingDB WHERE fecha = '"+modifiedDate+"' ORDER BY puntosJug DESC LIMIT 0,1" );
-    		datos = GestorBD.getMiGestorBD().sqlToJSON(result);
+    		datos = crearJSON(result);
     		
     		//Se cierra
         	GestorBD.getMiGestorBD().cerrarConexion();
@@ -109,8 +107,8 @@ public class RankingDB {
     	
     	JSONArray datos = null;
     	  	   	
-        String query = "SELECT * FROM rankingdb;";
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect(query);
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM rankingdb ORDER BY puntosJug DESC");
+
         
         if (!result.next())
         {
@@ -119,8 +117,7 @@ public class RankingDB {
         }
     	else
     	{
-    		result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM rankingdb ORDER BY puntosJug DESC");
-    		datos = GestorBD.getMiGestorBD().sqlToJSON(result);
+    		datos = crearJSON(result);
     		
     		//Se cierra
         	GestorBD.getMiGestorBD().cerrarConexion();
@@ -137,9 +134,8 @@ public class RankingDB {
     	GestorBD.getMiGestorBD().conectar();
     	
     	JSONArray JSONMedia = null;
-    	String query = "SELECT * FROM rankingdb;";
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect(query);
-         
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailusuario, AVG(puntosJug) FROM rankingdb GROUP BY emailusuario ORDER BY AVG(puntosJug) DESC");
+
         if (!result.next())
     	{
     		JOptionPane.showMessageDialog(null, "No hay partidas finalizadas", "Error", JOptionPane.ERROR_MESSAGE);
@@ -147,8 +143,7 @@ public class RankingDB {
         }
     	else
     	{
-    		result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailusuario, AVG(puntosJug) FROM rankingdb GROUP BY emailusuario ORDER BY AVG(puntosJug) DESC");
-    		JSONMedia = GestorBD.getMiGestorBD().sqlToJSON(result);
+    		JSONMedia = crearJSON(result);
     		
     		//Se cierra
         	GestorBD.getMiGestorBD().cerrarConexion();
@@ -157,6 +152,21 @@ public class RankingDB {
     	}
 
     }    
+    
+    private JSONArray crearJSON (ResultSet resultSet) throws Exception 
+	 {
+		 JSONArray jsonArray = new JSONArray();
+		 while (resultSet.next()) {
+			 int total_columns = resultSet.getMetaData().getColumnCount();
+		     JSONObject obj = new JSONObject();
+		     for (int i = 0; i < total_columns; i++) {
+		    	 obj.put(resultSet.getMetaData().getColumnLabel(i + 1).toLowerCase(), resultSet.getObject(i + 1));
+		     }
+		     jsonArray.put(obj);
+		 }
+
+		 return jsonArray;
+	 }
     		
 }
 

@@ -64,18 +64,4 @@ public class GestorBD {
 		 myStmt.executeUpdate(pSentencia);
 	}
 	
-	public JSONArray sqlToJSON (ResultSet resultSet) throws Exception 
-	 {
-		 JSONArray jsonArray = new JSONArray();
-		 while (resultSet.next()) {
-			 int total_columns = resultSet.getMetaData().getColumnCount();
-		     JSONObject obj = new JSONObject();
-		     for (int i = 0; i < total_columns; i++) {
-		    	 obj.put(resultSet.getMetaData().getColumnLabel(i + 1).toLowerCase(), resultSet.getObject(i + 1));
-		     }
-		     jsonArray.put(obj);
-		 }
-
-		 return jsonArray;
-	 }
 }
