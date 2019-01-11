@@ -1,5 +1,6 @@
 package packControlador;
 
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import packModelo.RankingDB;
 import packModelo.Tablero;
 import packVista.VentanaAyuda;
 import packVista.VentanaElegirRanking;
+import packVista.VentanaGuardado;
 import packVista.VentanaInicio;
 import packVista.VentanaJuego;
 import packVista.VentanaMejoresJugadores;
@@ -76,7 +78,7 @@ public class Controlador {
 		this.ventanaJuego.addElegirCarta3Listener(new ElegirCarta3Listener());
 		this.ventanaJuego.addElegirCarta4Listener(new ElegirCarta4Listener());
 		this.ventanaJuego.addSiguienteListener(new SiguienteListener());
-		/*this.ventanaJuego.addGuardarListener(new GuardarListener());*/
+		this.ventanaJuego.addGuardarListener(new GuardarListener());
 		
 		this.ventanaJuego.desactivarBotonJugarTurno();
 		this.ventanaJuego.desactivarBotonSiguiente();
@@ -104,7 +106,7 @@ public class Controlador {
 		this.ventanaInicio.setVisible(true);
 	}
 	
-	private void mostrarVentanaJuego() {
+	public void mostrarVentanaJuego() {
 		this.ventanaJuego.setVisible(true);
 	}
 
@@ -326,13 +328,14 @@ public class Controlador {
 			ventanaJuego.desactivarBotonSiguiente();
 		}
 	}
-	/**
+	
 	class GuardarListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			 
+			 VentanaGuardado miVentanaGuardado= new VentanaGuardado();
+			 miVentanaGuardado.setVisible(true);
 			
 		}		
 	}
-	**/
+
 }

@@ -146,7 +146,7 @@ public class VentanaJuego extends JFrame implements Observer {
         panelElegirCartas.add(btnSiguiente);
         
         btnGuardar = new JButton("Guardar");
-        panelElegirCartas.add(getBtnGuardar());
+        panelElegirCartas.add(btnGuardar);
 
         panelCola = new JPanel();
         contentPane.add(panelCola, BorderLayout.CENTER);
@@ -231,20 +231,6 @@ public class VentanaJuego extends JFrame implements Observer {
         }
         setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
     }
-
-    private Component getBtnGuardar() {
-    	if (btnGuardar == null) {
-    		btnGuardar = new JButton(" Guardar");
-    		btnGuardar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					VentanaGuardado ventanaGuardar =new VentanaGuardado();
-					
-					
-				}
-			});
-		}
-		return btnGuardar;
-	}
 
 	/**
      * Launch the application.

@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import packVista.VentanaMenuInicial;
+
 public class GuardadoTest {
 	JugadorReal test;
 	ListaCartas listaTest;
@@ -54,4 +56,10 @@ public class GuardadoTest {
 	public void obtenerDatosPartida() {
 		fail("Not yet implemented");
 	}
+	
+	@Test
+	public void guardar() {
+		fail("Not yet implemented");
+	}
+	
 }
