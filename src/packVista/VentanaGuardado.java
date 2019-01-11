@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 
 public class VentanaGuardado extends JFrame {
 
@@ -40,12 +43,23 @@ public class VentanaGuardado extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
+		JPanel campoInstruccion = new JPanel();
+		contentPane.add(campoInstruccion, BorderLayout.NORTH);
+		
+		JLabel lblIntroduceUnNombre = new JLabel("Introduce un nombre para la Baraja");
+		campoInstruccion.add(lblIntroduceUnNombre);
+		
+		JPanel campoText = new JPanel();
+		contentPane.add(campoText, BorderLayout.CENTER);
+		campoText.setLayout(null);
 		
 		textField = new JTextField();
-		panel.add(textField);
+		textField.setBounds(113, 45, 225, 19);
+		campoText.add(textField);
 		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Aceptar");
+		btnNewButton.setBounds(164, 76, 114, 25);
+		campoText.add(btnNewButton);
 	}
-
 }

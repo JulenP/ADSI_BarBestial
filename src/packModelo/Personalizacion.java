@@ -14,6 +14,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.json.JSONObject;
+
 import packGestores.GestorBD;
 import packVista.ventanaNombreBaraja;
 import packVista.ventanaPersonalizacion;
@@ -142,6 +144,16 @@ public class Personalizacion {
 		    }
 		    carpeta.delete();
 		    
+		}
+
+
+
+
+		public JSONObject getDatosPersonalizacion() {
+			JSONObject datos=new JSONObject();
+			datos.put("nombre", nombrePersonalizacion);
+			datos.put("path", path);
+			return null;
 		}  
 		
 		

@@ -163,7 +163,7 @@ public class Partida extends Observable {
 		if (listaJugadores.isEmpty()){
      		return null;
      	}
-    		return ((JugadorReal) listaJugadores.get(0)).obtenerEmail();
+    		return ((JugadorReal) obtenerJugadorTurnoActual()).obtenerEmail();
     }
     
     public JSONObject obtenerDatosPartida() {

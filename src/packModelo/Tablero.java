@@ -2,6 +2,8 @@ package packModelo;
 
 import java.util.Observable;
 
+import org.json.JSONArray;
+
 public class Tablero extends Observable {
     private static Tablero miTablero;
     private ListaCartas cola;
@@ -156,4 +158,10 @@ public class Tablero extends Observable {
             b.anadirCarta(c);
         }
     }
+
+	public JSONArray obtenerDatosTablero() {
+		return cola.obtenerDatosLista();
+		
+	}
+
 }

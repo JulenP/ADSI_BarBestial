@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -13,6 +15,8 @@ import packControlador.Controlador.MejorPuntuacionDiaListener;
 import packControlador.Controlador.MejoresJugadoresListener;
 import packControlador.Controlador.MejoresPartidasListener;
 import packControlador.Controlador.TusMejoresPartidasListener;
+import packExcepciones.nombreUsado;
+import packModelo.BarBestial;
 import packModelo.Jugador;
 import packModelo.Partida;
 import packModelo.RankingDB;
@@ -332,9 +336,18 @@ public class Controlador {
 	class GuardarListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			 VentanaGuardado miVentanaGuardado= new VentanaGuardado();
-			 miVentanaGuardado.setVisible(true);
-			
+			boolean repetir=true;
+			while(repetir) {
+				try {
+					String nombrePartida=JOptionPane.showInputDialog("Introduzca un nombre para la partida");
+					BarBestial.getBarBestial().guardar(nombrePartida);
+					repetir=false;
+				}catch(nombreUsado b){
+					JOptionPane.showMessageDialog(null, "nombre en uso", "Error", JOptionPane.WARNING_MESSAGE);
+				}catch(Exception b){
+					JOptionPane.showMessageDialog(null, "ha ocurrido un fallo", "Error", JOptionPane.WARNING_MESSAGE);
+				}
+			}
 		}		
 	}
 

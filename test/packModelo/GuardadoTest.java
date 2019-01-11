@@ -48,18 +48,4 @@ public class GuardadoTest {
 		assertEquals(contenido.get("indice"),0);
 	}
 	
-	public void obtenerDatosJugador() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void obtenerDatosPartida() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void guardar() {
-		fail("Not yet implemented");
-	}
-	
 }

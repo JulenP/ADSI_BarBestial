@@ -8,6 +8,7 @@ import javax.mail.MessagingException;
 
 import packGestores.GestorGuardadoCarga;
 import packGestores.GestorUsuarios;
+import packExcepciones.nombreUsado;
 
 public class BarBestial {
 	
@@ -67,7 +68,7 @@ public class BarBestial {
 			return false;
 		}
 		
-		public void guardarPartida(String nombrePartida) {
-			GestorGuardadoCarga.getGestorGuardadoCarga().guardarPartida(nombrePartida);
+		public void guardar(String nombrePartida) throws SQLException, nombreUsado {
+				GestorGuardadoCarga.getGestorGuardadoCarga().guardar(nombrePartida);
 		}
 }

@@ -1,5 +1,7 @@
 package packModelo;
 
+import org.json.JSONArray;
+
 public class Bar {
     private static Bar miBar;
     private ListaCartas lista;
@@ -46,4 +48,8 @@ public class Bar {
     public void anadirCarta(Carta pCarta) {
         this.lista.anadirCarta(pCarta);
     }
+
+	public JSONArray obtenerDatosBar() {
+		return lista.obtenerDatosLista();
+	}
 }
