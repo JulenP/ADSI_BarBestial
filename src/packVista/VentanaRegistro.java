@@ -176,4 +176,8 @@ public class VentanaRegistro extends JFrame {
 	public String getTextFieldPassword2Value() {
         return passwordField2.getText();
     }
+	
+	public JButton getCancelarButton(){
+		return btnCancelar;
+	}
 }

@@ -3,6 +3,7 @@ package packControlador;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -60,7 +61,7 @@ public class Controlador {
 		this.ventanaInicio = new VentanaInicio();
 		this.ventanaJuego = new VentanaJuego();
 		this.ventanaAyuda = new VentanaAyuda();
-		this.ventanaCambioContrasena = VentanaCambiarContrasena.getVentanaCambiocontrasena();
+		this.ventanaCambioContrasena = VentanaCambiarContrasena.getVentanaCambioContrasena();
 	
 		this.ventanaElegirRanking = new VentanaElegirRanking();
 		this.ventanaTusMejoresPartidas = new VentanaTusMejoresPartidas(datos);
@@ -314,7 +315,12 @@ public class Controlador {
 	class JugarTurnoListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			partida.jugarTurno();				
+			try {
+				partida.jugarTurno();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}				
 			
 			ventanaJuego.desactivarBotonJugarTurno();
 			ventanaJuego.activarBotonSiguiente();
@@ -325,7 +331,12 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			partida.obtenerJugadorTurnoActual().elegirCartaMano(0);
-			partida.jugarTurno();
+			try {
+				partida.jugarTurno();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			ventanaJuego.activarBotonesElegir();
 			ventanaJuego.desactivarBotonJugarTurno();

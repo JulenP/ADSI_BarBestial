@@ -29,7 +29,7 @@ public class VentanaCambiarContrasena extends JFrame {
 	
 	private static VentanaCambiarContrasena miVentanaCambioContrasena;
 	
-	public static VentanaCambiarContrasena getVentanaCambiocontrasena() {
+	public static VentanaCambiarContrasena getVentanaCambioContrasena() {
 		if (miVentanaCambioContrasena == null) {
 			miVentanaCambioContrasena = new VentanaCambiarContrasena();
 		}
@@ -158,4 +158,8 @@ public class VentanaCambiarContrasena extends JFrame {
 	public String getTextFieldPasswordNueva2Value() {
         return passwordFieldNueva2.getText();
     }
+	
+	public JButton getCancelarButton(){
+		return btnCancelar;
+	}
 }

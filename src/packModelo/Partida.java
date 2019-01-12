@@ -1,12 +1,18 @@
 package packModelo;
 
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Observable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import packGestores.GestorBD;
 
 public class Partida extends Observable {
     private static Partida miPartida;
@@ -46,7 +52,7 @@ public class Partida extends Observable {
         this.turnoActual = 0;
     }
     
-    public void jugarTurno() {
+    public void jugarTurno() throws SQLException {
         Tablero tablero = Tablero.getMiTablero();
         Jugador jugador;
         jugador = this.obtenerJugadorTurnoActual();
@@ -89,10 +95,11 @@ public class Partida extends Observable {
         }
     }
 
-    private void finalizar() {
+    private void finalizar() throws SQLException {
         String infoGanador = this.obtenerInformacionGanador();
+       
         /* Guardar ganador en la base de datos */
-        this.anadirGanadorDatabase(infoGanador);
+        this.anadirRankingDatabase();
 
         /* Notificar a la interfaz */
         this.notificar("fin-" + infoGanador);
@@ -145,13 +152,22 @@ public class Partida extends Observable {
         return Bar.getMiBar().obtenerFuerzaColor(pColor);
     }
 
-    private void anadirGanadorDatabase(String pInformacionGanador) {
-        RankingDB r = RankingDB.getRankingDB();
-        String nombre = pInformacionGanador.split(" ")[0];
-        int nCartas = Integer.parseInt(pInformacionGanador.split(" ")[1]);
-        int fuerza = Integer.parseInt(pInformacionGanador.split(" ")[2]);
-
-        //INSERT INTO BD NUEVA FILA A LA TABLA RANKING
+    private void anadirRankingDatabase() throws SQLException {
+               
+        String emailUsuario = BarBestial.getBarBestial().obtenerEmailUsuarioActual();
+        
+        EnumColor jugador = EnumColor.AZUL;
+        EnumColor pc = EnumColor.VERDE;
+        
+        int puntosJug = obtenerNumeroDeCartasColorEnBar(jugador);
+        int puntosCPU = obtenerNumeroDeCartasColorEnBar(pc);
+        
+        Date pFecha = new Date(); //Fecha Actual
+        String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(pFecha);		
+        String fecha = modifiedDate.toString();
+       
+        //Insertamos a la tabla Ranking los datos de la Partida 
+        GestorBD.getMiGestorBD().execSQL("INSERT INTO Ranking(fecha,emailUsuario,puntosJug,puntosCPU) VALUES ('"+modifiedDate+"','"+emailUsuario+"',"+puntosJug+","+puntosCPU+");");
     }
     
     private void notificar(String pInformacion) {
