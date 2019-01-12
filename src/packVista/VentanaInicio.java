@@ -105,6 +105,11 @@ public class VentanaInicio extends JFrame {
         btnCambiarContrasena.addActionListener(listenForBtnCambiarContrasena);
     }
     
+    public void addPersonalizacionListener(ActionListener listenForBtnCPersonalizacion) {
+        btnPersonalizarCartas.addActionListener(listenForBtnCPersonalizacion);
+    }
+    
+    
     /*public String getTextFieldNombreValue() {
         return this.textFieldNombre.getText();
     }*/

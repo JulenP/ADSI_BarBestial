@@ -79,6 +79,7 @@ public class Controlador {
 		this.ventanaInicio.addAyudaListener(new AyudaListener());
 		this.ventanaInicio.addRankingListener(new RankingListener());
 		this.ventanaInicio.addCambiarContrasenaListener(new CambiarContrasenaListener());
+		this.ventanaInicio.addPersonalizacionListener(new PersonalizacionListener());
 
 		/* Listeners VentanaJuego */
 		this.ventanaJuego.addJugarTurnoListener(new JugarTurnoListener());
@@ -193,7 +194,7 @@ public class Controlador {
 			else ventanaInicio.showNombreErrorMessage();			
 		}*/
 			mostrarVentanaJuego();
-			partida.inicializarPartida(null);;
+			partida.inicializarPartida(null);
 			setUpObservers();
 		}
 	}
@@ -202,6 +203,13 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 		    mostrarVentanaAyuda();
+		}
+	}
+	
+	class PersonalizacionListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		    mostrarVentanaPersonalizacion();
 		}
 	}
 	
@@ -225,7 +233,6 @@ public class Controlador {
 		    try {
 				mostrarVentanaTusMejoresPartidas();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -237,7 +244,6 @@ public class Controlador {
 		    try {
 				mostrarVentanaPuntuacionDia();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -249,7 +255,6 @@ public class Controlador {
 			try {
 				mostrarVentanaMejoresPartidas();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -261,7 +266,6 @@ public class Controlador {
 			try {
 				mostrarVentanaMejoresJugadores();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -345,7 +349,6 @@ public class Controlador {
 			try {
 				partida.jugarTurno();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
