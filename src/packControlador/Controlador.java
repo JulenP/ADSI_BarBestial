@@ -31,6 +31,7 @@ import packVista.VentanaMejoresJugadores;
 import packVista.VentanaMejoresPartidas;
 import packVista.VentanaPuntuacionDia;
 import packVista.VentanaTusMejoresPartidas;
+import packVista.ventanaPersonalizacion;
 import packVista.VentanaCambiarContrasena;
 
 public class Controlador {
@@ -52,6 +53,7 @@ public class Controlador {
 	private VentanaMejoresPartidas ventanaMejoresPartidas;
 	private VentanaMejoresJugadores ventanaMejoresJugadores;
 	private VentanaCambiarContrasena ventanaCambioContrasena;
+	private ventanaPersonalizacion ventanaPersonalizacion;
 	
 	public Controlador() throws JSONException {
 		this.partida = Partida.getMiPartida();
@@ -68,6 +70,8 @@ public class Controlador {
 		this.ventanaMejorPuntuacionDia = new VentanaPuntuacionDia(datos);
 		this.ventanaMejoresPartidas = new VentanaMejoresPartidas(datos);
 		this.ventanaMejoresJugadores = new VentanaMejoresJugadores(datos);
+		
+		this.ventanaPersonalizacion = new ventanaPersonalizacion();
 
 		
 		/* Listeners VentanaInicio */
@@ -94,7 +98,10 @@ public class Controlador {
 		this.ventanaElegirRanking.addMejoresPartidasListener(new MejoresPartidasListener());
 		this.ventanaElegirRanking.addMejoresJugadoresListener(new MejoresJugadoresListener());
 		this.ventanaElegirRanking.addAtrasRankingListener(new AtrasRankingListener());
-	}
+		
+		/*Listeners ventanaPersonalizacion */
+		
+		}
 	
 	public static Controlador getMiControlador() throws JSONException {
         if (miControlador == null) {
@@ -121,6 +128,10 @@ public class Controlador {
 	
 	private void mostrarVentanaElegirRanking(){
         this.ventanaElegirRanking.setVisible(true);
+    }
+	
+	private void mostrarVentanaPersonalizacion(){
+        this.ventanaPersonalizacion.setVisible(true);
     }
 	
 	private void mostrarVentanaTusMejoresPartidas() throws Exception{
