@@ -1,7 +1,9 @@
 package packGestores;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,9 +38,28 @@ public class GestorGuardadoCarga {
 			throw new nombreUsado(); 	
 		}
 		JSONObject partida=Partida.getMiPartida().obtenerDatosPartida();
+		JSONObject datosPersonalizacion=Personalizacion.getPersonalizacion().getDatosPersonalizacion();
+		JSONObject jugador=(JSONObject) partida.get("jugador");
+		JSONObject cpu=(JSONObject) partida.get("cpu");
+		JSONArray manoJug=jugador.getJSONArray("mano");
+		JSONArray mazoJug=jugador.getJSONArray("mazo");
+		JSONArray manoCpu=cpu.getJSONArray("mano");
+		JSONArray mazoCpu=cpu.getJSONArray("mazo");
 		JSONArray bar=Bar.getMiBar().obtenerDatosBar();
 		JSONArray tablero=Tablero.getMiTablero().obtenerDatosTablero();
-		JSONObject datosPersonalizacion=Personalizacion.getPersonalizacion().getDatosPersonalizacion();
+		String nombrePersonalizacion=datosPersonalizacion.getString("nombre");
+		String path=datosPersonalizacion.getString("path");
+		GestorBD temp = GestorBD.getMiGestorBD();
+		Date date=new Date();
+		String fecha=date.toGMTString();
+		temp.execSQL("INSERT INTO Partida VALUES("+nombrePartida+","+fecha+","+email+","+0+","+nombrePersonalizacion+")");
+		for(int i=0;i<tablero.length();i++) {
+			JSONObject cartaActual=(JSONObject) tablero.get(i);
+			String especie=cartaActual.getString("especie");
+			String color=cartaActual.getString("color");
+			int posicion=cartaActual.getInt("indice");
+			temp.execSQL("INSERT INTO Fila VALUES("+nombrePartida+","+especie+","+color+","+posicion+")");
+		}
 	}
 
 

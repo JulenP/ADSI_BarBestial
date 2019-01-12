@@ -24,5 +24,10 @@ public class BDTest {
 	public void test() throws SQLException {
 		GestorBD.getMiGestorBD().conectar();
 	}
+	
+	@Test
+	public void ranking() throws SQLException {
+		GestorBD.getMiGestorBD().execSQLSelect("SELECT * FROM Ranking");
+	}
 
 }
