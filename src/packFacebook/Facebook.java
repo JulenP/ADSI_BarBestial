@@ -13,7 +13,7 @@ public class Facebook extends Application {
 		String appId = "726061564446077";
 	    String appSecret = "01f510e45530ee03fe20062b736a4ded";
 	    Browser facebookBrowser = new Browser(appId, appSecret);
-	    Scene scene = new Scene(facebookBrowser, 900, 600, Color.web("#666970"));
+	    Scene scene = new Scene(facebookBrowser, 750, 500, Color.web("#666970"));
 	    primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 	    primaryStage.show();
