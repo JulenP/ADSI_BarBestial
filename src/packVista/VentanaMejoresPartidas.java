@@ -57,12 +57,12 @@ public class VentanaMejoresPartidas extends JFrame {
 			}
 		};
 	  
-	    //Añadir las columnas de la tabla	
+	    //Aï¿½adir las columnas de la tabla	
 		model.addColumn("JUGADOR");
-		model.addColumn("PUNTUACIÓN");
+		model.addColumn("PUNTUACI\u00d3N");
 		model.addColumn("FECHA");
 	
-		//Añadir las filas a la tabla desde el JSON
+		//Aï¿½adir las filas a la tabla desde el JSON
 		for (int i = 0; i < pDatos.length(); i++) 
 		{
 			org.json.JSONObject one = pDatos.getJSONObject(i);
