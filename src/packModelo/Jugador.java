@@ -161,7 +161,12 @@ public abstract class Jugador extends Observable {
     private boolean hayCartasEnMano() {
     	return !this.mano.vacia();
     }
-
+    
+    /**
+     * devuelve la informacion de mazo y mano dentro de un JSON
+     * El JSON contiene {mazo: [{especie: String,color:String,indice:int},{...}...],mano:[...]}
+     * @return
+     */
 	public JSONObject obtenerDatosJugador() {
 		JSONObject jugador=new JSONObject();
 		JSONArray mazoJSON= mazo.obtenerDatosLista();

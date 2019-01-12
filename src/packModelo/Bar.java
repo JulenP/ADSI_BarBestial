@@ -48,7 +48,11 @@ public class Bar {
     public void anadirCarta(Carta pCarta) {
         this.lista.anadirCarta(pCarta);
     }
-
+    
+    /**
+     * devuelve el lo recibido del metodo obtenerDatosLista de su lista
+     * @return
+     */
 	public JSONArray obtenerDatosBar() {
 		return lista.obtenerDatosLista();
 	}

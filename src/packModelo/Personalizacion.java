@@ -150,11 +150,9 @@ public class Personalizacion {
 
 
 
-		public JSONObject getDatosPersonalizacion() throws JSONException {
-			JSONObject datos=new JSONObject();
-			datos.put("nombre", nombrePersonalizacion);
-			datos.put("path", path);
-			return null;
+		public String getNombre() {
+			
+			return nombrePersonalizacion;
 		}  
 		
 		

@@ -295,7 +295,11 @@ public class ListaCartas {
         }
         return i;
     }
-
+    /**
+     * el metodo devuelve la informacion de las cartas ademas de la posicion que contiene la lista de cartas en un JSONArray
+     * JSON formato [{especie: String,color:String,indice:int},{...}...]
+     * @return
+     */
 	public JSONArray obtenerDatosLista() {
 		JSONArray listaCartas=new JSONArray();
 		Iterator<Carta> itr=lista.iterator();

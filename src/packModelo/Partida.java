@@ -181,7 +181,11 @@ public class Partida extends Observable {
      	}
     		return ((JugadorReal) listaJugadores.get(0)).obtenerEmail();
     }
-    
+    /**
+     * devuelve la informacion que contienen las manos y mazos de ambos jugadores
+     * JSON formato {"jugador": {mazo: [{especie: String,color:String,indice:int},{...}...],mano:[...]},"cpu":{mazo: [{especie: String,color:String,indice:int},{...}...],mano:[...]}}
+     * @return
+     */
     public JSONObject obtenerDatosPartida() {
     	JSONObject jugador0=listaJugadores.get(0).obtenerDatosJugador();
     	JSONObject jugador1=listaJugadores.get(1).obtenerDatosJugador();

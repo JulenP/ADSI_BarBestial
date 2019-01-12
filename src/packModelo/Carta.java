@@ -44,7 +44,10 @@ public class Carta implements Comparable<Carta> {
             }
         }
     }
-
+    /**
+     * devuelve la informacion(especie,color) de la carta en un JSONObject 
+     * JSON formato {especie: String,color:String}
+     */
 	public JSONObject obtenerDatosCarta() {
 		JSONObject carta=new JSONObject();
 		try {

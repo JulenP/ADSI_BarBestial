@@ -158,7 +158,11 @@ public class Tablero extends Observable {
             b.anadirCarta(c);
         }
     }
-
+    
+    /**
+     * devuelve el lo recibido del metodo obtenerDatosLista de su lista
+     * @return
+     */
 	public JSONArray obtenerDatosTablero() {
 		return cola.obtenerDatosLista();
 		
