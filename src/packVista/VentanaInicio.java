@@ -51,7 +51,7 @@ public class VentanaInicio extends JFrame {
         JPanel panelMenu = new JPanel();
         contentPane.add(panelMenu, BorderLayout.SOUTH);
         
-        btnCambiarContrasena = new JButton("Cambiar contraseña");
+        btnCambiarContrasena = new JButton("Cambiar contrase\u00f1a");
         panelMenu.add(btnCambiarContrasena);
         
         

@@ -70,7 +70,7 @@ public class VentanaMenuInicial extends JFrame {
 		btnLogin.addActionListener(new ControladorMenuInicial());
 		btnLogin.setActionCommand("login");
 		
-		btnRecuperarContrasena = new JButton("Recuperar Contraseña");
+		btnRecuperarContrasena = new JButton("Recuperar Contrase\u00f1a");
 		btnRecuperarContrasena.addActionListener(new ControladorMenuInicial());
 		btnRecuperarContrasena.setActionCommand("recuperarContrasena");
 		
