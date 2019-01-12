@@ -45,7 +45,7 @@ public class RankingDB {
     	
     	String pEmail = BarBestial.getBarBestial().obtenerEmailUsuarioActual();
 	
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM rankingdb WHERE emailUsuario = '"+pEmail+"' ORDER BY puntosJug DESC");
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM Ranking WHERE emailUsuario = '"+pEmail+"' ORDER BY puntosJug DESC");
         
         if (!result.next())
     	{
@@ -77,7 +77,7 @@ public class RankingDB {
         Date pFecha = new Date(); //Fecha Actual
         String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(pFecha);
     	
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug FROM rankingDB WHERE fecha = '"+modifiedDate+"' ORDER BY puntosJug DESC LIMIT 0,1" );
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug FROM Ranking WHERE fecha = '"+modifiedDate+"' ORDER BY puntosJug DESC LIMIT 0,1" );
 
         
         if (!result.next())
@@ -107,7 +107,7 @@ public class RankingDB {
     	
     	JSONArray datos = null;
     	  	   	
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM rankingdb ORDER BY puntosJug DESC");
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM Ranking ORDER BY puntosJug DESC");
 
         
         if (!result.next())
@@ -134,7 +134,7 @@ public class RankingDB {
     	GestorBD.getMiGestorBD().conectar();
     	
     	JSONArray JSONMedia = null;
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailusuario, AVG(puntosJug) FROM rankingdb GROUP BY emailusuario ORDER BY AVG(puntosJug) DESC");
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailusuario, AVG(puntosJug) FROM Ranking GROUP BY emailusuario ORDER BY AVG(puntosJug) DESC");
 
         if (!result.next())
     	{
