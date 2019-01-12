@@ -133,4 +133,8 @@ public class VentanaLogin extends JFrame {
 	public String getTextFieldPasswordValue() {
         return passwordField.getText();
     }
+	
+	public JButton getCancelarButton(){
+		return btnCancelar;
+	}
 }

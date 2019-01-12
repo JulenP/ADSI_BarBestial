@@ -15,9 +15,9 @@ public class ControladorCambiarContrasena implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
-		String passwordAntigua = VentanaCambiarContrasena.getVentanaCambiocontrasena().getTextFieldPasswordAntiguaValue();
-		String passwordNueva = VentanaCambiarContrasena.getVentanaCambiocontrasena().getTextFieldPasswordNuevaValue();
-		String passwordNueva2 = VentanaCambiarContrasena.getVentanaCambiocontrasena().getTextFieldPasswordNueva2Value();
+		String passwordAntigua = VentanaCambiarContrasena.getVentanaCambioContrasena().getTextFieldPasswordAntiguaValue();
+		String passwordNueva = VentanaCambiarContrasena.getVentanaCambioContrasena().getTextFieldPasswordNuevaValue();
+		String passwordNueva2 = VentanaCambiarContrasena.getVentanaCambioContrasena().getTextFieldPasswordNueva2Value();
 		
 		if(action.equals("aceptar")) { 
 			if (passwordAntigua.length()<=0  || passwordNueva.length()<=0  | passwordNueva2.length()<=0 ){

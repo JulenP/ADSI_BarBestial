@@ -60,7 +60,7 @@ public class Controlador {
 		this.ventanaInicio = new VentanaInicio();
 		this.ventanaJuego = new VentanaJuego();
 		this.ventanaAyuda = new VentanaAyuda();
-		this.ventanaCambioContrasena = VentanaCambiarContrasena.getVentanaCambiocontrasena();
+		this.ventanaCambioContrasena = VentanaCambiarContrasena.getVentanaCambioContrasena();
 	
 		this.ventanaElegirRanking = new VentanaElegirRanking();
 		this.ventanaTusMejoresPartidas = new VentanaTusMejoresPartidas(datos);

@@ -122,4 +122,8 @@ public class VentanaRecuperarContrasena extends JFrame {
 	public String getTextFieldEmailValue(){
 		return textFieldEmail.getText();
 	}
+	
+	public JButton getCancelarButton(){
+		return btnCancelar;
+	}
 }
