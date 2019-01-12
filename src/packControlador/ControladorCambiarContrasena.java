@@ -31,7 +31,7 @@ public class ControladorCambiarContrasena implements ActionListener {
 					} else {
 						if (passwordNueva.equals(passwordNueva2)){
 							BarBestial.getBarBestial().cambiarContrasena(email, passwordNueva);
-							VentanaCambiarContrasena.getVentanaCambiocontrasena().dispose();
+							VentanaCambiarContrasena.getVentanaCambioContrasena().dispose();
 						} else {
 							JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
 						}
@@ -42,7 +42,7 @@ public class ControladorCambiarContrasena implements ActionListener {
 			}
 			
 		} else if (action.equals("cancelar")) {
-			VentanaCambiarContrasena.getVentanaCambiocontrasena().dispose();
+			VentanaCambiarContrasena.getVentanaCambioContrasena().dispose();
 		}	
 	}
 }
