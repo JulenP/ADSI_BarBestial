@@ -24,7 +24,7 @@ public class ControladorMenuInicial implements ActionListener{
 		    		if (BarBestial.getBarBestial().obtenerEmailUsuarioActual()!=null){
 		    			VentanaMenuInicial.getVentanaMenuInicial().dispose();
 		    			VentanaInicio.getVentanaInicio().setVisible(true);
-		    			VentanaInicio.getVentanaInicio().desactivarBotonCambiarContraseña();
+		    			VentanaInicio.getVentanaInicio().desactivarBotonCambiarContrasena();
 		    		} 
 			} catch (Exception e1) {
 				e1.printStackTrace();

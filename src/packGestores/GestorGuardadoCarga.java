@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import packExcepciones.nombreUsado;
@@ -25,8 +26,9 @@ public class GestorGuardadoCarga {
 	 * @param nombrePartida
 	 * @throws SQLException
 	 * @throws nombreUsado ocurre cuando el jugador ya a usado el nombre en otra partida
+	 * @throws JSONException 
 	 */
-	public void guardar(String nombrePartida) throws SQLException, nombreUsado {
+	public void guardar(String nombrePartida) throws SQLException, nombreUsado, JSONException {
 		String email=Partida.getMiPartida().obtenerEmail();
 		ResultSet resultado;
 		resultado = GestorBD.getMiGestorBD().execSQLSelect("SELECT nombrePartida FROM Partida WHERE nombrePartida="+nombrePartida+" AND email="+email);	

@@ -14,6 +14,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import packGestores.GestorBD;
@@ -149,7 +150,7 @@ public class Personalizacion {
 
 
 
-		public JSONObject getDatosPersonalizacion() {
+		public JSONObject getDatosPersonalizacion() throws JSONException {
 			JSONObject datos=new JSONObject();
 			datos.put("nombre", nombrePersonalizacion);
 			datos.put("path", path);

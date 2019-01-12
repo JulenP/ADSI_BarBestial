@@ -58,7 +58,7 @@ public class VentanaMenuInicial extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		btnIniciarSesionRRSS = new JButton("Iniciar sesión con Facebook");
+		btnIniciarSesionRRSS = new JButton("Iniciar Sesion con Facebook");
 		btnIniciarSesionRRSS.addActionListener(new ControladorMenuInicial());
 		btnIniciarSesionRRSS.setActionCommand("inicioSesionFB");
 		
@@ -66,11 +66,11 @@ public class VentanaMenuInicial extends JFrame {
 		btnRegistrarse.addActionListener(new ControladorMenuInicial());
 		btnRegistrarse.setActionCommand("registro");
 		
-		btnLogin = new JButton("Iniciar Sesión ");
+		btnLogin = new JButton("Iniciar Sesion ");
 		btnLogin.addActionListener(new ControladorMenuInicial());
 		btnLogin.setActionCommand("login");
 		
-		btnRecuperarContrasena = new JButton("Recuperar Contraseña");
+		btnRecuperarContrasena = new JButton("Recuperar Contrase�a");
 		btnRecuperarContrasena.addActionListener(new ControladorMenuInicial());
 		btnRecuperarContrasena.setActionCommand("recuperarContrasena");
 		

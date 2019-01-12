@@ -59,7 +59,7 @@ public class VentanaRegistro extends JFrame {
 	public VentanaRegistro() {
 		setTitle("Registro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 356, 300);
+		setBounds(100, 100, 417, 303);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -68,9 +68,9 @@ public class VentanaRegistro extends JFrame {
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		
-		JLabel lblContrasena = new JLabel("Contraseña");
+		JLabel lblContrasena = new JLabel("Contrase\u00F1a");
 		
-		JLabel lblConfirmarContrasena = new JLabel(" Confirmar contraseña");
+		JLabel lblConfirmarContrasena = new JLabel(" Confirmar contrase\u00F1a");
 		
 		textFieldEmail = new JTextField();
 		textFieldEmail.setColumns(10);
