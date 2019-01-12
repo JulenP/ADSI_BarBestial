@@ -9,7 +9,7 @@ import packVista.VentanaMenuInicial;
 public class BarBestial {
     public static void main(String[] args) throws JSONException {
         //Controlador controlador = new Controlador();
-       // controlador.iniciarAplicacion();
+        //controlador.iniciarAplicacion();
 		VentanaMenuInicial.getVentanaMenuInicial().setVisible(true); 
 		
     }
