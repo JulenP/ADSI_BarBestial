@@ -77,12 +77,12 @@ public class RankingDB {
         Date pFecha = new Date(); //Fecha Actual
         String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(pFecha);
     	
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug FROM Ranking WHERE fecha = '"+modifiedDate+"' ORDER BY puntosJug DESC LIMIT 0,1" );
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug FROM Ranking WHERE fecha = '"+modifiedDate+"' ORDER BY puntosJug DESC LIMIT 0,2" );
 
         
         if (!result.next())
     	{
-    		JOptionPane.showMessageDialog(null, "No hay partidas finalizadas en este día", "Error", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "No hay partidas finalizadas en este dÃ­a", "Error", JOptionPane.ERROR_MESSAGE);
     		return null;
         }
     	else
