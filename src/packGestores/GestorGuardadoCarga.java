@@ -65,6 +65,27 @@ public class GestorGuardadoCarga {
 				int posicion=cartaActual.getInt("indice");
 				temp.addToTransaction("INSERT INTO Fila VALUES('"+nombrePartida+"','"+especie+"','"+color+"',"+posicion+");");
 			}
+			for(int i=0;i<tablero.length();i++) {
+				JSONObject cartaActual=(JSONObject) tablero.get(i);
+				String especie=cartaActual.getString("especie");
+				String color=cartaActual.getString("color");
+				int posicion=cartaActual.getInt("indice");
+				temp.addToTransaction("INSERT INTO Fila VALUES('"+nombrePartida+"','"+especie+"','"+color+"',"+posicion+");");
+			}
+			for(int i=0;i<tablero.length();i++) {
+				JSONObject cartaActual=(JSONObject) tablero.get(i);
+				String especie=cartaActual.getString("especie");
+				String color=cartaActual.getString("color");
+				int posicion=cartaActual.getInt("indice");
+				temp.addToTransaction("INSERT INTO Fila VALUES('"+nombrePartida+"','"+especie+"','"+color+"',"+posicion+");");
+			}
+			for(int i=0;i<tablero.length();i++) {
+				JSONObject cartaActual=(JSONObject) tablero.get(i);
+				String especie=cartaActual.getString("especie");
+				String color=cartaActual.getString("color");
+				int posicion=cartaActual.getInt("indice");
+				temp.addToTransaction("INSERT INTO Fila VALUES('"+nombrePartida+"','"+especie+"','"+color+"',"+posicion+");");
+			}
 		}catch (Exception e) {
 			
 		}

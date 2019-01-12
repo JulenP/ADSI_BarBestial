@@ -27,7 +27,7 @@ public class GestorBD {
 
 	public void conectar() throws SQLException { 	
 		
-		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/barbestial", "usuario", "password");
+		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/barbestial", "root", "euiti");
 
 		if(myConn.isClosed() == false)
 		{
