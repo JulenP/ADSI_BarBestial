@@ -64,4 +64,18 @@ public class GestorBD {
 		 myStmt.executeUpdate(pSentencia);
 	}
 	
+	public void addToTransaction(String pSentencia) {
+		try {
+			myStmt.addBatch(pSentencia);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void ejecutarTransaccion() throws SQLException {
+		myStmt.executeBatch();
+	}
+	
+	
 }

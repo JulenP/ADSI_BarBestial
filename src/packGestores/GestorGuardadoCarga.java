@@ -35,7 +35,7 @@ public class GestorGuardadoCarga {
 	public void guardar(String nombrePartida) throws SQLException, nombreUsado, JSONException {
 		String email=Partida.getMiPartida().obtenerEmail();
 		ResultSet resultado;
-		resultado = GestorBD.getMiGestorBD().execSQLSelect("SELECT nombrePartida FROM Partida WHERE nombrePartida="+nombrePartida+" AND email="+email+";");	
+		resultado = GestorBD.getMiGestorBD().execSQLSelect("SELECT nombrePartida FROM Partida WHERE nombrePartida='"+nombrePartida+"' AND email='"+email+"';");	
 		if(!resultado.isBeforeFirst()) {
 			throw new nombreUsado(); 	
 		}
@@ -52,17 +52,23 @@ public class GestorGuardadoCarga {
 		String nombrePersonalizacion=datosPersonalizacion.getString("nombre");
 		String path=datosPersonalizacion.getString("path");
 		GestorBD temp = GestorBD.getMiGestorBD();
+		temp.conectar();
 		Date date=new Date();
 		DateFormat formato=new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 		String fecha=formato.format(date);
-		temp.execSQL("INSERT INTO Partida VALUES("+nombrePartida+","+fecha+","+email+","+0+","+nombrePersonalizacion+");");
-		for(int i=0;i<tablero.length();i++) {
-			JSONObject cartaActual=(JSONObject) tablero.get(i);
-			String especie=cartaActual.getString("especie");
-			String color=cartaActual.getString("color");
-			int posicion=cartaActual.getInt("indice");
-			temp.execSQL("INSERT INTO Fila VALUES("+nombrePartida+","+especie+","+color+","+posicion+");");
+		try {
+			temp.addToTransaction("INSERT INTO Partida VALUES('"+nombrePartida+"','"+fecha+"','"+email+"',"+0+",'"+nombrePersonalizacion+"');");
+			for(int i=0;i<tablero.length();i++) {
+				JSONObject cartaActual=(JSONObject) tablero.get(i);
+				String especie=cartaActual.getString("especie");
+				String color=cartaActual.getString("color");
+				int posicion=cartaActual.getInt("indice");
+				temp.addToTransaction("INSERT INTO Fila VALUES('"+nombrePartida+"','"+especie+"','"+color+"',"+posicion+");");
+			}
+		}catch (Exception e) {
+			
 		}
+		
 	}
 
 

@@ -120,7 +120,7 @@ public class GuardadoTest {
 	public void insertarMazoOrd() {
 		System.out.println("Prueba insertarMazoOrd\n");
 		try {
-			GestorBD.getMiGestorBD().execSQL("INSERT OR REPLACE INTO MazoOrd VALUES('"+nombre+"','"+especie+"','"+color+"','"+0+"');");
+			GestorBD.getMiGestorBD().execSQL("INSERT OR REPLACE INTO MazoOrd VALUES('"+nombre+"','"+especie+"','"+color+"',"+0+");");
 			ResultSet resultado = GestorBD.getMiGestorBD().execSQLSelect("SELECT * From MazoOrd WHERE nombrePartida='"+nombre+"';");
 			resultado.next();
 			assertEquals(resultado.getString("especie"), "mono");
@@ -170,21 +170,6 @@ public class GuardadoTest {
 			resultado.next();
 			assertEquals(resultado.getString("especie"), "mono");
 			GestorBD.getMiGestorBD().execSQL("DELETE FROM Fila WHERE nombrePartida='"+nombre+"';");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	@Test
-	public void insertarRanking() {
-		System.out.println("Prueba insertarRanking\n");
-		try {
-			GestorBD.getMiGestorBD().execSQL("INSERT OR REPLACE INTO Ranking (fecha,emailUsuario,puntosJug,puntosCPU) Values('dia15','test',"+1+","+1+");");
-			ResultSet resultado = GestorBD.getMiGestorBD().execSQLSelect("SELECT * From Ranking WHERE emailUsuario='test';");
-			resultado.next();
-			assertEquals(resultado.getString("emailUsuario"), "test");
-			GestorBD.getMiGestorBD().execSQL("DELETE FROM Ranking WHERE emailUsuario='test';");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

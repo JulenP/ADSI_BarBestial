@@ -371,6 +371,7 @@ public class Controlador {
 					JOptionPane.showMessageDialog(null, "nombre en uso", "Error", JOptionPane.WARNING_MESSAGE);
 				}catch(Exception b){
 					JOptionPane.showMessageDialog(null, "ha ocurrido un fallo", "Error", JOptionPane.WARNING_MESSAGE);
+					repetir=false;
 				}
 			}
 		}		
