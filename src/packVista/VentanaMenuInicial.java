@@ -70,7 +70,7 @@ public class VentanaMenuInicial extends JFrame {
 		btnLogin.addActionListener(new ControladorMenuInicial());
 		btnLogin.setActionCommand("login");
 		
-		btnRecuperarContrasena = new JButton("Recuperar Contraseña");
+		btnRecuperarContrasena = new JButton("Recuperar ContraseÃ±a");
 		btnRecuperarContrasena.addActionListener(new ControladorMenuInicial());
 		btnRecuperarContrasena.setActionCommand("recuperarContrasena");
 		
@@ -111,5 +111,17 @@ public class VentanaMenuInicial extends JFrame {
             frameSize.width = screenSize.width;
         }
         setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
+	}
+	
+		public JButton getLoginButton(){
+		return btnLogin;
+	}
+	
+	public JButton getRegistroButton(){
+		return btnRegistrarse;
+	}
+	
+	public JButton getRecuperarButton(){
+		return btnRecuperarContrasena;
 	}
 }
