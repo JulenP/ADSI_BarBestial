@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 
 public class GestorBD {
-	//private String url="jdbc:sqlite:BarBestial.db";
+	
 	private static GestorBD miGestorBD;
 	private Connection myConn;
 	private Statement myStmt;
