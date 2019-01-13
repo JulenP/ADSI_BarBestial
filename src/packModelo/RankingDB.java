@@ -38,15 +38,18 @@ public class RankingDB {
     //RANKING MEJORES PARTIDAS USUARIO
     public JSONArray obtenerRankingMPU() throws Exception
     {
-    	// Se conecta
+    	// Se conecta a la BD
     	GestorBD.getMiGestorBD().conectar();
     	
     	JSONArray datos = null;
     	
+    	// Obtenemos el email del usuario actual
     	String pEmail = BarBestial.getBarBestial().obtenerEmailUsuarioActual();
 	
+    	// Hacemos la consulta de datos
         ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM Ranking WHERE emailUsuario = '"+pEmail+"' ORDER BY puntosJug DESC");
         
+        // Si no tiene partidas jugadas, salta un error
         if (!result.next())
     	{
     		JOptionPane.showMessageDialog(null, "No tienes partidas finalizadas", "Error", JOptionPane.ERROR_MESSAGE);
@@ -54,10 +57,10 @@ public class RankingDB {
         }
     	else
     	{
-    	   		
+    	   	// Creamos el JSON con los datos que pasaremos a la vista	
     		datos = crearJSON(result);
     		
-    		//Se cierra
+    		// Se cierra la conexion con la BD
         	GestorBD.getMiGestorBD().cerrarConexion();
  
         	return datos;
@@ -69,27 +72,30 @@ public class RankingDB {
     //RANKING MEJOR PUNTUACION DIA
     public JSONArray obtenerRankingMPD() throws Exception
     {
-    	// Se conecta
+    	// Se conecta a la BD
     	GestorBD.getMiGestorBD().conectar();
     	
     	JSONArray datos = null;
     	
-        Date pFecha = new Date(); //Fecha Actual
+    	// Obtenemos la Fecha Actual
+    	Date pFecha = new Date(); 
         String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(pFecha);
     	
+        // Hacemos la consulta de datos
         ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug FROM Ranking WHERE fecha = '"+modifiedDate+"' ORDER BY puntosJug DESC LIMIT 0,2" );
 
-        
+        // Si no tiene partidas finalizadas en la fecha actual, salta un error
         if (!result.next())
     	{
-    		JOptionPane.showMessageDialog(null, "No hay partidas finalizadas en este dÃ­a", "Error", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "No hay partidas finalizadas en el día de hoy", "Error", JOptionPane.ERROR_MESSAGE);
     		return null;
         }
     	else
     	{
+    	   	// Creamos el JSON con los datos que pasaremos a la vista	
     		datos = crearJSON(result);
     		
-    		//Se cierra
+    		// Se cierra la conexion con la BD
         	GestorBD.getMiGestorBD().cerrarConexion();
     		
         	return datos;
@@ -102,14 +108,15 @@ public class RankingDB {
     //RANKING MEJORES PARTIDAS GLOBAL
     public JSONArray obtenerRankingMPG() throws Exception
     {
-    	// Se conecta
+    	// Se conecta a la BD
     	GestorBD.getMiGestorBD().conectar();
     	
     	JSONArray datos = null;
-    	  	   	
+    	  	  
+    	// Hacemos la consulta de datos
         ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM Ranking ORDER BY puntosJug DESC");
 
-        
+        //Si no tiene partidas jugadas, salta un error
         if (!result.next())
         {
     		JOptionPane.showMessageDialog(null, "No hay partidas finalizadas", "Error", JOptionPane.ERROR_MESSAGE);
@@ -117,9 +124,10 @@ public class RankingDB {
         }
     	else
     	{
+    		// Creamos el JSON con los datos que pasaremos a la vista	
     		datos = crearJSON(result);
     		
-    		//Se cierra
+    		//Se cierra la conexion con la BD
         	GestorBD.getMiGestorBD().cerrarConexion();
     		
     		return datos;
@@ -130,12 +138,15 @@ public class RankingDB {
     //RANKING MEJORES JUGADORES GLOBAL
     public JSONArray obtenerRankingMJG() throws Exception
     {
-    	// Se conecta
+    	// Se conecta a la BD
     	GestorBD.getMiGestorBD().conectar();
     	
     	JSONArray JSONMedia = null;
+    	
+    	// Hacemos la consulta de datos
         ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailusuario, AVG(puntosJug) FROM Ranking GROUP BY emailusuario ORDER BY AVG(puntosJug) DESC");
 
+        // Si tiene partidas jugadas, salta un error
         if (!result.next())
     	{
     		JOptionPane.showMessageDialog(null, "No hay partidas finalizadas", "Error", JOptionPane.ERROR_MESSAGE);
@@ -143,16 +154,18 @@ public class RankingDB {
         }
     	else
     	{
+    	   	// Creamos el JSON con los datos que pasaremos a la vista	
     		JSONMedia = crearJSON(result);
     		
-    		//Se cierra
+    		//Se cierra la conexion con la BD
         	GestorBD.getMiGestorBD().cerrarConexion();
         	
     		return JSONMedia;
     	}
 
     }    
-    
+
+    //CREACION DEL JSON PARA ENVIAR LOS DATOS A LA INTERFAZ
     private JSONArray crearJSON (ResultSet resultSet) throws Exception 
 	 {
 		 JSONArray jsonArray = new JSONArray();
