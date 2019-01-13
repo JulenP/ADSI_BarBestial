@@ -66,7 +66,7 @@ public class VentanaTusMejoresPartidas extends JFrame {
 		model.addColumn("PUNTUACI\u00d3N");
 		model.addColumn("FECHA");
 	
-		//Aï¿½adir las filas a la tabla desde el JSON
+		//Añadir las filas a la tabla desde el JSON
 		for (int i = 0; i < pDatos.length(); i++) 
 		{
 		 org.json.JSONObject one = pDatos.getJSONObject(i);

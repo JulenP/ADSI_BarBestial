@@ -47,8 +47,8 @@ public class RankingDB {
     	String pEmail = BarBestial.getBarBestial().obtenerEmailUsuarioActual();
 	
     	// Hacemos la consulta de datos
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM Ranking WHERE emailUsuario = '"+pEmail+"' ORDER BY puntosJug DESC");
-        
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM ranking WHERE emailUsuario = '"+pEmail+"' ORDER BY puntosJug DESC");
+    
         // Si no tiene partidas jugadas, salta un error
         if (!result.next())
     	{
@@ -82,7 +82,7 @@ public class RankingDB {
         String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(pFecha);
     	
         // Hacemos la consulta de datos
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug FROM Ranking WHERE fecha = '"+modifiedDate+"' ORDER BY puntosJug DESC LIMIT 0,2" );
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug FROM ranking WHERE fecha = '"+modifiedDate+"' ORDER BY puntosJug DESC LIMIT 0,1" );
 
         // Si no tiene partidas finalizadas en la fecha actual, salta un error
         if (!result.next())
@@ -114,7 +114,7 @@ public class RankingDB {
     	JSONArray datos = null;
     	  	  
     	// Hacemos la consulta de datos
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM Ranking ORDER BY puntosJug DESC");
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailUsuario,puntosJug,fecha FROM ranking ORDER BY puntosJug DESC");
 
         //Si no tiene partidas jugadas, salta un error
         if (!result.next())
@@ -144,7 +144,7 @@ public class RankingDB {
     	JSONArray JSONMedia = null;
     	
     	// Hacemos la consulta de datos
-        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailusuario, AVG(puntosJug) FROM Ranking GROUP BY emailusuario ORDER BY AVG(puntosJug) DESC");
+        ResultSet result = GestorBD.getMiGestorBD().execSQLSelect("SELECT emailusuario, AVG(puntosJug) FROM ranking GROUP BY emailusuario ORDER BY AVG(puntosJug) DESC");
 
         // Si tiene partidas jugadas, salta un error
         if (!result.next())
@@ -169,15 +169,33 @@ public class RankingDB {
     private JSONArray crearJSON (ResultSet resultSet) throws Exception 
 	 {
 		 JSONArray jsonArray = new JSONArray();
+		 int total_columns = resultSet.getMetaData().getColumnCount();
+		 
+		 //Añadimos el primer elemento
+		 JSONObject objFirst = new JSONObject();
+		 for (int i = 0; i < total_columns; i++) 
+	     {
+	    	 objFirst.put(resultSet.getMetaData().getColumnLabel(i + 1).toLowerCase(), resultSet.getObject(i + 1));
+	    	 	 
+	     }
+	     
+	     jsonArray.put(objFirst);
+		 
+	     //Continuamos añadiendo
 		 while (resultSet.next()) {
-			 int total_columns = resultSet.getMetaData().getColumnCount();
-		     JSONObject obj = new JSONObject();
-		     for (int i = 0; i < total_columns; i++) {
+	     
+			 JSONObject obj = new JSONObject();
+		     
+		     for (int i = 0; i < total_columns; i++) 
+		     {
 		    	 obj.put(resultSet.getMetaData().getColumnLabel(i + 1).toLowerCase(), resultSet.getObject(i + 1));
+		 	 
 		     }
+		     
 		     jsonArray.put(obj);
+		     
 		 }
-
+		
 		 return jsonArray;
 	 }
     		
