@@ -95,6 +95,7 @@ public class GestorGuardadoCarga {
 				String color=cartaActual.getString("color");
 				temp.addToTransaction("INSERT INTO ManoOrd VALUES('"+nombrePartida+"','"+especie+"','"+color+"');");
 			}
+			temp.cerrarConexion();
 		}catch (Exception e) {
 			throw (e );
 		}

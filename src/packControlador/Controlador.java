@@ -11,11 +11,7 @@ import javax.swing.JOptionPane;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import packControlador.Controlador.AtrasRankingListener;
-import packControlador.Controlador.MejorPuntuacionDiaListener;
-import packControlador.Controlador.MejoresJugadoresListener;
-import packControlador.Controlador.MejoresPartidasListener;
-import packControlador.Controlador.TusMejoresPartidasListener;
+
 import packExcepciones.nombreUsado;
 import packModelo.BarBestial;
 import packModelo.Jugador;
@@ -31,7 +27,6 @@ import packVista.VentanaMejoresPartidas;
 import packVista.VentanaPuntuacionDia;
 import packVista.VentanaTusMejoresPartidas;
 import packVista.ventanaNombreBaraja;
-import packVista.ventanaPersonalizacion;
 import packVista.VentanaCambiarContrasena;
 
 public class Controlador {
@@ -121,6 +116,10 @@ public class Controlador {
 	
 	public void mostrarVentanaJuego() {
 		this.ventanaJuego.setVisible(true);
+	}
+	
+	public void desactivarBotonCambiarContrasena(){
+		this.ventanaInicio.desactivarBotonCambiarContrasena();
 	}
 
 	private void mostrarVentanaAyuda(){
@@ -368,9 +367,9 @@ public class Controlador {
 					BarBestial.getBarBestial().guardar(nombrePartida);
 					repetir=false;
 				}catch(nombreUsado b){
-					JOptionPane.showMessageDialog(null, "nombre en uso", "Error", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Nombre en uso", "Error", JOptionPane.WARNING_MESSAGE);
 				}catch(Exception b){
-					JOptionPane.showMessageDialog(null, "ha ocurrido un fallo", "Error", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Ha ocurrido un fallo", "Error", JOptionPane.WARNING_MESSAGE);
 					repetir=false;
 				}
 			}

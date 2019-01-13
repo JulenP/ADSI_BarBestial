@@ -165,10 +165,12 @@ public class Partida extends Observable {
         Date pFecha = new Date(); //Fecha Actual
         String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(pFecha);		
         String fecha = modifiedDate.toString();
-       
+		
+       GestorBD.getMiGestorBD().conectar();
         //Insertamos a la tabla Ranking los datos de la Partida 
         GestorBD.getMiGestorBD().execSQL("INSERT INTO Ranking(fecha,emailUsuario,puntosJug,puntosCPU) VALUES ('"+modifiedDate+"','"+emailUsuario+"',"+puntosJug+","+puntosCPU+");");
-    }
+    		GestorBD.getMiGestorBD().cerrarConexion();
+	}
     
     private void notificar(String pInformacion) {
         super.setChanged();
@@ -179,7 +181,7 @@ public class Partida extends Observable {
 		if (listaJugadores.isEmpty()){
      		return null;
      	}
-    		return ((JugadorReal) listaJugadores.get(0)).obtenerEmail();
+    		return ((JugadorReal) listaJugadores.get(0)).obtenerEmail();  // El jugador real siempre va a ser el primero que se añade a la lista de jugadores
     }
     /**
      * devuelve la informacion que contienen las manos y mazos de ambos jugadores

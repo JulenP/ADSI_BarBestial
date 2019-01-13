@@ -301,8 +301,6 @@ public class ventanaPersonalizacion extends JFrame {
 						&& btnCamaleon.getText() == "PERSONALIZADO" && btnFoca.getText() == "PERSONALIZADO" && btnCebra.getText() == "PERSONALIZADO" && btnSerpiente.getText() == "PERSONALIZADO" 
 						&& btnJirafa.getText() == "PERSONALIZADO" && btnCocodrilo.getText() == "PERSONALIZADO" && btnHipopotamo.getText() == "PERSONALIZADO" && btnLeon.getText() == "PERSONALIZADO") {
 					btnGuardar.setEnabled(true);
-					VentanaInicio ventana = new VentanaInicio();
-					ventana.setVisible(true);
 					setVisible(false);
 				}else {
 					JOptionPane.showMessageDialog(null, "Tienes que personalizar las 12 cartas");
