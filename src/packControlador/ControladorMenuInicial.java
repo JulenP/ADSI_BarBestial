@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import packFacebook.Facebook;
 import packModelo.BarBestial;
 import packVista.VentanaLogin;
-import packVista.VentanaInicio;
 import packVista.VentanaMenuInicial;
 import packVista.VentanaRecuperarContrasena;
 import packVista.VentanaRegistro;
@@ -23,8 +22,8 @@ public class ControladorMenuInicial implements ActionListener{
 		   	 	Facebook.launch(Facebook.class);
 		    		if (BarBestial.getBarBestial().obtenerEmailUsuarioActual()!=null){
 		    			VentanaMenuInicial.getVentanaMenuInicial().dispose();
-		    			VentanaInicio.getVentanaInicio().setVisible(true);
-		    			VentanaInicio.getVentanaInicio().desactivarBotonCambiarContrasena();
+		    			Controlador.getMiControlador().iniciarAplicacion();
+		    			Controlador.getMiControlador().desactivarBotonCambiarContrasena();
 		    		} 
 			} catch (Exception e1) {
 				e1.printStackTrace();

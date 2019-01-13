@@ -16,15 +16,6 @@ public class VentanaInicio extends JFrame {
     private JButton btnRanking;
     private JButton btnCambiarContrasena;
     private JButton btnPersonalizarCartas;
-    
-    private static VentanaInicio miVentanaInicio;
-	
-	public static VentanaInicio getVentanaInicio() {
-		if (miVentanaInicio == null) {
-			miVentanaInicio = new VentanaInicio();
-		}
-		return miVentanaInicio;
-	}
 
     /**
      * Create the frame.

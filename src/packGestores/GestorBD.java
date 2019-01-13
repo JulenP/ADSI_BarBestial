@@ -6,9 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.json.JSONArray;
-import org.json.simple.JSONObject;
-
 
 public class GestorBD {
 	//private String url="jdbc:sqlite:BarBestial.db";
@@ -69,7 +66,6 @@ public class GestorBD {
 		try {
 			myStmt.addBatch(pSentencia);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -165,10 +165,12 @@ public class Partida extends Observable {
         Date pFecha = new Date(); //Fecha Actual
         String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(pFecha);		
         String fecha = modifiedDate.toString();
-       
+		
+       GestorBD.getMiGestorBD().conectar();
         //Insertamos a la tabla Ranking los datos de la Partida 
         GestorBD.getMiGestorBD().execSQL("INSERT INTO Ranking(fecha,emailUsuario,puntosJug,puntosCPU) VALUES ('"+modifiedDate+"','"+emailUsuario+"',"+puntosJug+","+puntosCPU+");");
-    }
+    		GestorBD.getMiGestorBD().cerrarConexion();
+	}
     
     private void notificar(String pInformacion) {
         super.setChanged();
