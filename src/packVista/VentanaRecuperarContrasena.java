@@ -54,15 +54,15 @@ public class VentanaRecuperarContrasena extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaRecuperarContrasena() {
-		setTitle("Recuperación de contraseña");
+		setTitle("Recuperacion de contrase\u00F1a");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 311, 197);
+		setBounds(100, 100, 397, 197);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblEmail = new JLabel("Email ");
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		textFieldEmail = new JTextField();
 		textFieldEmail.setColumns(10);
@@ -80,17 +80,15 @@ public class VentanaRecuperarContrasena extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(25)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(24)
 							.addComponent(btnAceptar)
-							.addGap(18)
+							.addGap(47)
 							.addComponent(btnCancelar))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldEmail, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(37, Short.MAX_VALUE))
+						.addComponent(textFieldEmail))
+					.addContainerGap(85, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -99,11 +97,11 @@ public class VentanaRecuperarContrasena extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblEmail)
 						.addComponent(textFieldEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(42)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnAceptar)
-						.addComponent(btnCancelar))
-					.addContainerGap(16, Short.MAX_VALUE))
+					.addGap(29)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnCancelar)
+						.addComponent(btnAceptar))
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 		

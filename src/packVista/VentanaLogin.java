@@ -57,7 +57,7 @@ public class VentanaLogin extends JFrame {
 	public VentanaLogin() {
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 244, 250);
+		setBounds(100, 100, 283, 250);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -67,7 +67,7 @@ public class VentanaLogin extends JFrame {
 		textFieldEmail = new JTextField();
 		textFieldEmail.setColumns(10);
 		
-		JLabel lblContrasena = new JLabel("Contraseña");
+		JLabel lblContrasena = new JLabel("Contrase\u00F1a");
 		
 		passwordField = new JPasswordField();
 		
@@ -85,24 +85,22 @@ public class VentanaLogin extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(24)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblContrasena, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textFieldEmail, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
 						.addComponent(passwordField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 							.addComponent(btnAceptar)
-							.addPreferredGap(ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-							.addComponent(btnCancelar))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(lblContrasena, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-							.addGap(91))
-						.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+							.addComponent(btnCancelar)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(32)
+					.addGap(38)
 					.addComponent(lblEmail)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textFieldEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(8)
 					.addComponent(lblContrasena)

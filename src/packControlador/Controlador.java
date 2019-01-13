@@ -24,7 +24,6 @@ import packModelo.RankingDB;
 import packModelo.Tablero;
 import packVista.VentanaAyuda;
 import packVista.VentanaElegirRanking;
-import packVista.VentanaGuardado;
 import packVista.VentanaInicio;
 import packVista.VentanaJuego;
 import packVista.VentanaMejoresJugadores;
