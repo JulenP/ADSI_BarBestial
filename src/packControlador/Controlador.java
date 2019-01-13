@@ -31,6 +31,7 @@ import packVista.VentanaMejoresJugadores;
 import packVista.VentanaMejoresPartidas;
 import packVista.VentanaPuntuacionDia;
 import packVista.VentanaTusMejoresPartidas;
+import packVista.ventanaNombreBaraja;
 import packVista.ventanaPersonalizacion;
 import packVista.VentanaCambiarContrasena;
 
@@ -53,7 +54,7 @@ public class Controlador {
 	private VentanaMejoresPartidas ventanaMejoresPartidas;
 	private VentanaMejoresJugadores ventanaMejoresJugadores;
 	private VentanaCambiarContrasena ventanaCambioContrasena;
-	private ventanaPersonalizacion ventanaPersonalizacion;
+	private ventanaNombreBaraja ventanaPersonalizacion;
 	
 	public Controlador() throws JSONException {
 		this.partida = Partida.getMiPartida();
@@ -71,7 +72,7 @@ public class Controlador {
 		this.ventanaMejoresPartidas = new VentanaMejoresPartidas(datos);
 		this.ventanaMejoresJugadores = new VentanaMejoresJugadores(datos);
 		
-		this.ventanaPersonalizacion = new ventanaPersonalizacion();
+		this.ventanaPersonalizacion = new ventanaNombreBaraja();
 
 		
 		/* Listeners VentanaInicio */
