@@ -183,10 +183,10 @@ CREATE TABLE `ranking` (
 --
 
 INSERT INTO `ranking` (`id`, `fecha`, `emailUsuario`, `puntosJug`, `puntosCPU`) VALUES
-(1, '2018-12-27', 'a@a.com', 2, 1),
-(2, '2018-12-27', 'a@a.com', 3, 2),
-(3, '2018-12-27', 'b@b.com', 5, 3),
-(4, '2018-12-28', 'c@c.com', 7, 3);
+(1, '2019-01-06', 'a@a.com', 2, 1),
+(2, '2019-01-10', 'a@a.com', 3, 2),
+(3, '2018-12-27', 'edurne@gmail.com', 5, 3),
+(4, '2018-12-28', 'lerulolu@gmail.com', 7, 3);
 
 -- --------------------------------------------------------
 
@@ -207,8 +207,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`email`, `nombre`, `clave`, `puntosAyuda`) VALUES
 ('a@a.com', 'a', '1234', 0),
-('edurne@gmail.com', 'edurne', 'edurne', 0),
-('lerulolu@gmail.com', 'leire', '1234', 0);
+('edurne@gmail.com', 'Edurne', 'edurne', 0),
+('lerulolu@gmail.com', 'Leire', '1234', 0);
 
 --
 -- Índices para tablas volcadas
