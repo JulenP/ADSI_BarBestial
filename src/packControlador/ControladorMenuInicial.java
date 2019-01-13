@@ -20,6 +20,9 @@ public class ControladorMenuInicial implements ActionListener{
 			
 		    try {
 		   	 	Facebook.launch(Facebook.class);
+				/*
+		   	 	 *  Si el jugador esta añadido en la partida significa que se ha identificado coorectamente mediante Facebook
+		   	 	 */
 		    		if (BarBestial.getBarBestial().obtenerEmailUsuarioActual()!=null){
 		    			VentanaMenuInicial.getVentanaMenuInicial().dispose();
 		    			Controlador.getMiControlador().iniciarAplicacion();

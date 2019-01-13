@@ -31,7 +31,9 @@ public class ControladorRecuperarContrasena implements ActionListener{
 						JOptionPane.showMessageDialog(null, "Los datos no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 					
-				} catch (SQLException | MessagingException e1) {
+				} catch (SQLException e1){
+					e1.printStackTrace();
+				} catch (MessagingException e2) {
 					JOptionPane.showMessageDialog(null, "No se ha podido enviar un mensaje con tu contraseña porque el formato del email no es correcto", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}

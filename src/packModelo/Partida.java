@@ -181,7 +181,7 @@ public class Partida extends Observable {
 		if (listaJugadores.isEmpty()){
      		return null;
      	}
-    		return ((JugadorReal) listaJugadores.get(0)).obtenerEmail();
+    		return ((JugadorReal) listaJugadores.get(0)).obtenerEmail();  // El jugador real siempre va a ser el primero que se añade a la lista de jugadores
     }
     /**
      * devuelve la informacion que contienen las manos y mazos de ambos jugadores
