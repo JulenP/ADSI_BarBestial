@@ -56,7 +56,7 @@ public class ventanaPersonalizacion extends JFrame {
 				File carpeta = new File("resources/barajas/"+nombre);
 				try {
 					GestorBD.getMiGestorBD().conectar();
-					String sentencia = "DELETE FROM Personalizar WHERE Personalizar.nombreBaraja = '"+ nombre+"'";
+					String sentencia = "DELETE FROM personalizacion WHERE personalizacion.nombrePersonalizacion = '"+ nombre+"'";
 				    GestorBD.getMiGestorBD().execSQL(sentencia);
 					Personalizacion.getPersonalizacion().eliminarCarpeta(carpeta);
 				} catch (Exception e) {

@@ -50,7 +50,7 @@ public class Personalizacion {
 	    	File destino = new File("resources/barajas/"+pNombreBaraja);
 	    	copiarBaraja(origen, destino); //ESTE METODO ES PARA LUEGO UNIR LAS IMAGENES.
 	    	GestorBD.getMiGestorBD().conectar();
-	    	String sentencia = "INSERT INTO Personalizar(nombreBaraja, path) VALUES ('"+pNombreBaraja+"','"+destino.getAbsolutePath()+"')";
+	    	String sentencia = "INSERT INTO personalizacion(nombrePersonalizacion, path) VALUES ('"+pNombreBaraja+"','"+destino.getAbsolutePath()+"')";
 	    //	"DELETE FROM Personalizar WHERE Personalizar.nombreBaraja = '"+ nombre+"'"
 	    	GestorBD.getMiGestorBD().execSQL(sentencia);
 	    	ventanaPersonalizacion ventana = new ventanaPersonalizacion();

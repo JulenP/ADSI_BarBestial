@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-01-2019 a las 20:27:24
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
+-- Tiempo de generación: 13-01-2019 a las 10:28:36
+-- Versión del servidor: 10.1.37-MariaDB
+-- Versión de PHP: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -157,8 +159,9 @@ CREATE TABLE `partida` (
 --
 
 CREATE TABLE `personalizacion` (
-  `emailUsuario` varchar(255) NOT NULL,
-  `nombrePersonalizacion` varchar(255) NOT NULL
+  `emailUsuario` varchar(255) DEFAULT NULL,
+  `nombrePersonalizacion` varchar(255) NOT NULL,
+  `path` varchar(700) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -204,7 +207,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`email`, `nombre`, `clave`, `puntosAyuda`) VALUES
 ('a@a.com', 'a', '1234', 0),
-('edurne@gmail.com', 'edurne', 'edurne', 0);
+('edurne@gmail.com', 'edurne', 'edurne', 0),
+('lerulolu@gmail.com', 'leire', '1234', 0);
 
 --
 -- Índices para tablas volcadas
@@ -262,7 +266,7 @@ ALTER TABLE `partida`
 -- Indices de la tabla `personalizacion`
 --
 ALTER TABLE `personalizacion`
-  ADD PRIMARY KEY (`emailUsuario`,`nombrePersonalizacion`);
+  ADD PRIMARY KEY (`nombrePersonalizacion`);
 
 --
 -- Indices de la tabla `ranking`
@@ -285,6 +289,8 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `ranking`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
